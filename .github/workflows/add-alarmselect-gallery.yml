@@ -1,0 +1,42 @@
+name: Add AlarmSelect to gallery
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  update-gallery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Patch gallery and remove workflow
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = 'src/main.jsx';
+          let content = fs.readFileSync(path, 'utf8');
+          if (!content.includes("/assets/screenshots/AlarmSelect.png")) {
+            const marker = "  {\n    src: '/assets/screenshots/MultipleAlarms.jpg',\n    title: 'Multiple alarms',\n    description: 'Keep several alarms ready for different routines.',\n  },\n";
+            const addition = marker + "  {\n    src: '/assets/screenshots/AlarmSelect.png',\n    title: 'Edit alarm',\n    description: 'Set the alarm time, label, repeat days, wake-up options, vibration, and snooze duration.',\n  },\n";
+            if (!content.includes(marker)) {
+              throw new Error('Gallery insertion marker not found');
+            }
+            content = content.replace(marker, addition);
+            fs.writeFileSync(path, content);
+          }
+          fs.rmSync('.github/workflows/add-alarmselect-gallery.yml', { force: true });
+          NODE
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/main.jsx .github/workflows/add-alarmselect-gallery.yml
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "feat: add AlarmSelect screenshot to gallery"
+            git push
+          fi
