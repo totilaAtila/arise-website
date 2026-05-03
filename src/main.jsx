@@ -418,11 +418,9 @@ function Gallery() {
 function HeroDevice() {
   return (
     <div className="hero-device" aria-hidden="true">
-      <div className="floating-badge top">{Icon('clock')}</div>
       <div className="phone-frame hero-phone">
         <img src="/assets/screenshots/HomeScreen.png" alt="" />
       </div>
-      <div className="floating-badge bottom">{Icon('palette')}</div>
     </div>
   );
 }
