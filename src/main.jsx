@@ -17,6 +17,11 @@ const screenshots = [
     description: 'Keep several alarms ready for different routines.',
   },
   {
+    src: '/assets/screenshots/AlarmSelect.png',
+    title: 'Edit alarm',
+    description: 'Set the alarm time, label, repeat days, wake-up options, vibration, and snooze duration.',
+  },
+  {
     src: '/assets/screenshots/LockScreenAlarm.jpg',
     title: 'Lock-screen alarm',
     description: 'Snooze with one tap or swipe up to stop.',
