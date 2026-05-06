@@ -77,7 +77,7 @@ const features = [
     group: 'Gentle wake-up',
     items: [
       ['Volume fade-in', 'Volume gradually increases from 5% to 100%.', 'volume', 'free'],
-      ['Sunrise animation', 'The screen transitions from dark tones to sunrise colors during fade-in.', 'sunrise', 'free'],
+      ['Theme-based fade-in', 'The active app theme fades in from darker tones to brighter colors during the wake-up sequence.', 'sunrise', 'free'],
       ['Smart snooze', 'Large snooze button with automatically decreasing duration.', 'hand', 'free'],
       ['Swipe up to stop', 'Protection against accidentally dismissing the alarm.', 'shield', 'free'],
     ],
@@ -134,7 +134,7 @@ const faqs = [
   ['Where can I download Arise?', 'Arise is currently available as a pre-release APK from GitHub Releases. The Google Play version is planned for a future release.'],
   ['Is Arise free?', 'Yes. Arise is currently free during pre-release testing. Core alarm features will remain free after the Google Play launch. Some advanced features may later become available as a one-time purchase.'],
   ['Does it need an internet connection?', 'No. Arise works completely offline. It does not use external servers, analytics, advertising SDKs, or cloud sync.'],
-  ['How does the gentle wake-up effect work?', 'The alarm volume gradually increases from a low level to full volume, while the animated background transitions toward sunrise colors.'],
+  ['How does the gentle wake-up effect work?', 'The alarm volume gradually increases from a low level to full volume, while the active app theme fades in visually from darker tones to brighter colors in sync with the wake-up sequence.'],
   ['How do I stop the alarm?', 'The alarm is dismissed by swiping up. This helps reduce accidental dismissals while still keeping snooze easy to access.'],
   ['Does the alarm sound when the phone is on Do Not Disturb?', 'Arise supports Do Not Disturb override when the required Android permission is granted. The exact behavior may depend on Android settings and device manufacturer restrictions.'],
   ['Can I create custom themes?', 'Yes. Arise includes preset themes and a custom theme creator. During pre-release testing, premium-marked features are available for free.'],
