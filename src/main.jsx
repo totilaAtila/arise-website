@@ -80,6 +80,7 @@ const features = [
       ['Theme-based fade-in', 'The active app theme fades in from darker tones to brighter colors during the wake-up sequence.', 'sunrise', 'free'],
       ['Smart snooze', 'Large snooze button with automatically decreasing duration.', 'hand', 'free'],
       ['Swipe up to stop', 'Protection against accidentally dismissing the alarm.', 'shield', 'free'],
+      ['Circular snooze screen', 'A large glass-style snooze control with animated swipe-up guidance.', 'hand', 'free'],
     ],
   },
   {
@@ -87,14 +88,26 @@ const features = [
     items: [
       ['Configurable timer', 'Set any duration with an optional sound at the end.', 'timer', 'free'],
       ['Precise stopwatch', 'Stopwatch with milliseconds for exact measurements.', 'stopwatch', 'free'],
+      ['Swipe-friendly navigation', 'Move naturally between main screens without interfering with vertical scrolling.', 'hand', 'free'],
     ],
   },
   {
     group: 'Customization',
     items: [
       ['4 preset themes', 'Classic, Aurora, Sunrise, and Ocean.', 'palette', 'free'],
-      ['Custom themes', 'Create your own theme with the color palette.', 'sparkles', 'premium'],
+      ['Editable custom themes', 'Create, reopen, and refine your own visual themes.', 'sparkles', 'premium'],
+      ['3-zone colour editor', 'Drag colour zones directly on the preview to shape the background.', 'palette', 'premium'],
+      ['Fine visual tuning', 'Adjust brightness, tone, colour purity, and orb behaviour for custom themes.', 'settings', 'premium'],
       ['Flexible time format', 'Choose between 12-hour or 24-hour time format.', 'calendar', 'free'],
+    ],
+  },
+
+  {
+    group: 'Language & navigation',
+    items: [
+      ['In-app language selector', 'Choose the app language from Settings without changing the whole phone.', 'globe', 'free'],
+      ['Expanded localization', 'Language support has been expanded beyond English and Romanian for a broader international release.', 'fileText', 'free'],
+      ['Directional swipe transitions', 'Screen transitions follow the direction of your swipe for a more natural feel.', 'chevronRight', 'free'],
     ],
   },
   {
@@ -103,6 +116,7 @@ const features = [
       ['Do Not Disturb support', 'Alarm sound can work through Do Not Disturb when the required Android permission is granted.', 'moon', 'free'],
       ['Lock-screen support', 'The alarm screen is designed to appear and work on the lock screen.', 'phone', 'free'],
       ['Settings shortcuts', 'Quick access to Android settings for alarm-related permissions.', 'settings', 'free'],
+      ['Safer alarm deletion', 'Alarm deletion uses confirmation instead of accidental swipe removal.', 'shield', 'free'],
       ['Boot persistence', 'Enabled alarms are rescheduled after the device restarts.', 'rotate', 'free'],
     ],
   },
@@ -137,8 +151,9 @@ const faqs = [
   ['How does the gentle wake-up effect work?', 'The alarm volume gradually increases from a low level to full volume, while the active app theme fades in visually from darker tones to brighter colors in sync with the wake-up sequence.'],
   ['How do I stop the alarm?', 'The alarm is dismissed by swiping up. This helps reduce accidental dismissals while still keeping snooze easy to access.'],
   ['Does the alarm sound when the phone is on Do Not Disturb?', 'Arise supports Do Not Disturb override when the required Android permission is granted. The exact behavior may depend on Android settings and device manufacturer restrictions.'],
-  ['Can I create custom themes?', 'Yes. Arise includes preset themes and a custom theme creator. Some advanced customization features may later become available as premium features.'],
+  ['Can I create custom themes?', 'Yes. Arise includes preset themes, editable custom themes, a 3-zone colour editor, and fine tuning controls for brightness, tone, colour purity, and background orb behaviour. Some advanced customization features may later become available as premium features.'],
   ['What time formats are available?', 'Arise supports both 12-hour and 24-hour time formats.'],
+  ['Which languages does Arise support?', 'Arise includes an in-app language selector and expanded localization for a broader international release.'],
   ['Why does Arise request exact alarm permissions?', 'Exact alarm permissions are required so scheduled alarms can fire at the intended time instead of being delayed by Android power management.'],
   ['Why does Arise ask to ignore battery optimization?', 'Some Android devices aggressively delay background alarm work. This permission helps keep alarms reliable.'],
   ['Is the source code available?', 'No. The Arise source code is private.'],
@@ -233,7 +248,7 @@ function HomePage({ navigate }) {
         <div className="hero-content">
           <div className="pill">{Icon('star')} Google Play release is being prepared</div>
           <h1><span>Arise</span><br />Modern alarm clock for Android</h1>
-          <p className="hero-copy">A beautifully animated alarm clock with custom themes, gradual volume fade-in, lock-screen support, and fully offline operation.</p>
+          <p className="hero-copy">A beautifully animated alarm clock with custom themes, swipe-friendly navigation, expanded language support, gradual volume fade-in, lock-screen support, and fully offline operation.</p>
           <div className="cta-row">
             <span className="button primary" aria-disabled="true">{Icon('store')} Google Play coming soon</span>
           </div>
@@ -253,7 +268,8 @@ function HomePage({ navigate }) {
         <div className="feature-summary-grid">
           <SummaryCard iconName="alarm" title="Reliable alarms" text="Exact scheduling, boot persistence, lock-screen support, and Android settings shortcuts." />
           <SummaryCard iconName="sunrise" title="Gentle wake-up" text="Volume fade-in, sunrise animation, snooze, and swipe-to-stop protection." />
-          <SummaryCard iconName="palette" title="Personal design" text="Preset themes, custom themes, flexible time format, and animated backgrounds." />
+          <SummaryCard iconName="palette" title="Personal design" text="Preset themes, editable custom themes, fine visual controls, and animated backgrounds." />
+          <SummaryCard iconName="globe" title="Localized experience" text="Expanded language support with an in-app language selector." />
         </div>
       </section>
 
