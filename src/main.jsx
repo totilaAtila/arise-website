@@ -108,7 +108,7 @@ const privacyCards = [
   ['No internet', 'Arise works completely offline and has no external servers.', 'wifiOff'],
   ['No tracking', 'No analytics, no ads, no tracking tools, and no third-party data sharing.', 'eyeOff'],
   ['Minimal permissions', 'Only permissions required for reliable alarm functionality are requested.', 'lock'],
-  ['Open source', 'The source code is public on GitHub and can be independently reviewed.', 'shield'],
+  ['Private source code', 'The Arise source code is private and is not available for public download.', 'shield'],
   ['No account required', 'No sign-up, no login, and no personal profile.', 'fileText'],
 ];
 
@@ -126,17 +126,17 @@ const permissions = [
 
 const faqs = [
   ['What devices does Arise work on?', 'Arise is designed for Android 8.0 / API 26 or newer. Some alarm permissions and lock-screen behavior can depend on Android version and device manufacturer settings.'],
-  ['Where can I download Arise?', 'Arise is currently available as a pre-release APK from GitHub Releases. The Google Play version is planned for a future release.'],
-  ['Is Arise free?', 'Yes. Arise is currently free during pre-release testing. Core alarm features will remain free after the Google Play launch. Some advanced features may later become available as a one-time purchase.'],
+  ['Where can I download Arise?', 'Arise is not currently available for public download. The Google Play release is being prepared.'],
+  ['Is Arise free?', 'Core alarm features are planned to remain free after the Google Play launch. Some advanced features may later become available as a one-time purchase.'],
   ['Does it need an internet connection?', 'No. Arise works completely offline. It does not use external servers, analytics, advertising SDKs, or cloud sync.'],
   ['How does the gentle wake-up effect work?', 'The alarm volume gradually increases from a low level to full volume, while the animated background transitions toward sunrise colors.'],
   ['How do I stop the alarm?', 'The alarm is dismissed by swiping up. This helps reduce accidental dismissals while still keeping snooze easy to access.'],
   ['Does the alarm sound when the phone is on Do Not Disturb?', 'Arise supports Do Not Disturb override when the required Android permission is granted. The exact behavior may depend on Android settings and device manufacturer restrictions.'],
-  ['Can I create custom themes?', 'Yes. Arise includes preset themes and a custom theme creator. During pre-release testing, premium-marked features are available for free.'],
+  ['Can I create custom themes?', 'Yes. Arise includes preset themes and a custom theme creator. Some advanced customization features may later become available as premium features.'],
   ['What time formats are available?', 'Arise supports both 12-hour and 24-hour time formats.'],
   ['Why does Arise request exact alarm permissions?', 'Exact alarm permissions are required so scheduled alarms can fire at the intended time instead of being delayed by Android power management.'],
   ['Why does Arise ask to ignore battery optimization?', 'Some Android devices aggressively delay background alarm work. This permission helps keep alarms reliable.'],
-  ['Is the source code available?', 'Yes. Arise is open source under the MIT License and the source code is available on GitHub.'],
+  ['Is the source code available?', 'No. The Arise source code is private.'],
 ];
 
 function App() {
@@ -214,7 +214,6 @@ function Header({ menuOpen, setMenuOpen, navigate, isPrivacy }) {
           {links.map(([label, href]) => (
             <button key={label} onClick={() => navigate(href)}>{label}</button>
           ))}
-          <a href={appConfig.githubUrl}>GitHub</a>
           <a href={`mailto:${appConfig.supportEmail}`}>Contact</a>
         </div>
       )}
@@ -227,14 +226,13 @@ function HomePage({ navigate }) {
     <>
       <section className="hero section-pad" id="top">
         <div className="hero-content">
-          <div className="pill">{Icon('star')} Free Android pre-release</div>
+          <div className="pill">{Icon('star')} Google Play release is being prepared</div>
           <h1><span>Arise</span><br />Modern alarm clock for Android</h1>
           <p className="hero-copy">A beautifully animated alarm clock with custom themes, gradual volume fade-in, lock-screen support, and fully offline operation.</p>
           <div className="cta-row">
-            <a className="button primary" href={appConfig.releasesUrl}>{Icon('download')} Get pre-release APK</a>
-            <a className="button secondary" href={appConfig.githubUrl}>{Icon('github')} View on GitHub</a>
+            <span className="button primary" aria-disabled="true">{Icon('store')} Google Play coming soon</span>
           </div>
-          <p className="small-note">Pre-release build for testing. Google Play release coming later.</p>
+          <p className="small-note">Arise is not currently available for public download.</p>
           <div className="quick-points">
             <span>{Icon('bell')} Multiple alarms</span>
             <span>{Icon('palette')} Custom themes</span>
@@ -270,14 +268,14 @@ function HomePage({ navigate }) {
       </section>
 
       <section className="section-pad full-features">
-        <SectionHeading eyebrow="Complete feature list" title="Free now, prepared for Google Play" text="Premium-marked features are currently free during pre-release testing." />
+        <SectionHeading eyebrow="Complete feature list" title="Prepared for Google Play" text="The public Google Play release is being prepared." />
         <div className="tabs-note">
           <span className="chip free">Free</span>
           <span className="chip premium">Premium — Coming soon</span>
         </div>
         <FeatureGroups />
         <div className="notice-card">
-          <strong>Note:</strong> Premium features are currently free during pre-release testing. After the Google Play launch, some advanced features may become available as a one-time purchase. Core alarm features will remain free.
+          <strong>Note:</strong> Arise is not currently available for public download. The Google Play release is being prepared. Core alarm features are planned to remain free, while some advanced features may later become available as a one-time purchase.
         </div>
       </section>
 
@@ -331,7 +329,7 @@ function PrivacyPage() {
 
         <div className="policy-card wide">
           <h2>Contact</h2>
-          <p>For questions about this policy, contact us at <a href={`mailto:${appConfig.supportEmail}`}>{appConfig.supportEmail}</a> or open an issue on GitHub.</p>
+          <p>For questions about this policy, contact us at <a href={`mailto:${appConfig.supportEmail}`}>{appConfig.supportEmail}</a>.</p>
         </div>
       </section>
 
@@ -462,7 +460,6 @@ function Footer({ navigate }) {
           <div className="footer-brand"><img src={icon} alt="" /><strong>Arise</strong></div>
           <p>Modern alarm clock for Android with customizable themes, volume fade-in, and completely offline functionality.</p>
           <div className="footer-icons">
-            <a href={appConfig.githubUrl} aria-label="GitHub">{Icon('github')}</a>
             <a href={`mailto:${appConfig.supportEmail}`} aria-label="Email support">{Icon('mail')}</a>
           </div>
         </div>
@@ -471,20 +468,17 @@ function Footer({ navigate }) {
           <a href="/#gallery">Gallery</a>
           <a href="/privacy" onClick={goPrivacy}>Privacy</a>
           <a href="/#faq">FAQ</a>
-          <a href={appConfig.githubUrl}>GitHub</a>
         </div>
         <div>
           <h3>Contact</h3>
           <a href={`mailto:${appConfig.supportEmail}`}>{appConfig.supportEmail}</a>
-          <a href={appConfig.releasesUrl}>GitHub Releases</a>
-          <a href={`${appConfig.githubUrl}/issues`}>Report bug</a>
+          <a href={`mailto:${appConfig.supportEmail}`}>Email support</a>
         </div>
       </div>
       <div className="footer-bottom">
-        <p>© 2026 Arise. Open source under the MIT License.</p>
+        <p>© 2026 Arise. All rights reserved.</p>
         <div>
           <a href="/privacy" onClick={goPrivacy}>Privacy Policy</a>
-          <a href={`${appConfig.githubUrl}/blob/main/LICENSE`}>MIT License</a>
         </div>
       </div>
     </footer>
