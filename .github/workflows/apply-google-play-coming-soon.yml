@@ -1,0 +1,121 @@
+name: Apply Google Play coming soon messaging
+
+on:
+  push:
+    branches: [update-google-play-coming-soon]
+
+permissions:
+  contents: write
+
+jobs:
+  patch-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Patch website copy
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = 'src/main.jsx';
+          let content = fs.readFileSync(path, 'utf8');
+
+          content = content.replace(
+            "  ['Open source', 'The source code is public on GitHub and can be independently reviewed.', 'shield'],",
+            "  ['Private source code', 'The Arise source code is private and is not available for public download.', 'shield'],"
+          );
+
+          content = content.replace(
+            "  ['Where can I download Arise?', 'Arise is currently available as a pre-release APK from GitHub Releases. The Google Play version is planned for a future release.'],",
+            "  ['Where can I download Arise?', 'Arise is not currently available for public download. The Google Play release is being prepared.'],"
+          );
+
+          content = content.replace(
+            "  ['Is Arise free?', 'Yes. Arise is currently free during pre-release testing. Core alarm features will remain free after the Google Play launch. Some advanced features may later become available as a one-time purchase.'],",
+            "  ['Is Arise free?', 'Core alarm features are planned to remain free after the Google Play launch. Some advanced features may later become available as a one-time purchase.'],"
+          );
+
+          content = content.replace(
+            "  ['Can I create custom themes?', 'Yes. Arise includes preset themes and a custom theme creator. During pre-release testing, premium-marked features are available for free.'],",
+            "  ['Can I create custom themes?', 'Yes. Arise includes preset themes and a custom theme creator. Some advanced customization features may later become available as premium features.'],"
+          );
+
+          content = content.replace(
+            "  ['Is the source code available?', 'Yes. Arise is open source under the MIT License and the source code is available on GitHub.'],",
+            "  ['Is the source code available?', 'No. The Arise source code is private.'],"
+          );
+
+          content = content.replace(
+            "<div className=\"pill\">{Icon('star')} Free Android pre-release</div>",
+            "<div className=\"pill\">{Icon('star')} Google Play release is being prepared</div>"
+          );
+
+          content = content.replace(
+            /<div className=\"cta-row\">\n\s*<a className=\"button primary\" href=\{appConfig\.releasesUrl\}>\{Icon\('download'\)\} Get pre-release APK<\/a>\n\s*<a className=\"button secondary\" href=\{appConfig\.githubUrl\}>\{Icon\('github'\)\} View on GitHub<\/a>\n\s*<\/div>/,
+            `<div className="cta-row">\n            <span className="button primary" aria-disabled="true">{Icon('store')} Google Play coming soon</span>\n          </div>`
+          );
+
+          content = content.replace(
+            "<p className=\"small-note\">Pre-release build for testing. Google Play release coming later.</p>",
+            "<p className=\"small-note\">Arise is not currently available for public download.</p>"
+          );
+
+          content = content.replace(
+            "<SectionHeading eyebrow=\"Complete feature list\" title=\"Free now, prepared for Google Play\" text=\"Premium-marked features are currently free during pre-release testing.\" />",
+            "<SectionHeading eyebrow=\"Complete feature list\" title=\"Prepared for Google Play\" text=\"The public Google Play release is being prepared.\" />"
+          );
+
+          content = content.replace(
+            "<strong>Note:</strong> Premium features are currently free during pre-release testing. After the Google Play launch, some advanced features may become available as a one-time purchase. Core alarm features will remain free.",
+            "<strong>Note:</strong> Arise is not currently available for public download. The Google Play release is being prepared. Core alarm features are planned to remain free, while some advanced features may later become available as a one-time purchase."
+          );
+
+          content = content.replace(
+            "<a href={appConfig.githubUrl}>GitHub</a>\n          <a href={`mailto:${appConfig.supportEmail}`}>Contact</a>",
+            "<a href={`mailto:${appConfig.supportEmail}`}>Contact</a>"
+          );
+
+          content = content.replace(
+            "<p>For questions about this policy, contact us at <a href={`mailto:${appConfig.supportEmail}`}>{appConfig.supportEmail}</a> or open an issue on GitHub.</p>",
+            "<p>For questions about this policy, contact us at <a href={`mailto:${appConfig.supportEmail}`}>{appConfig.supportEmail}</a>.</p>"
+          );
+
+          content = content.replace(
+            "            <a href={appConfig.githubUrl} aria-label=\"GitHub\">{Icon('github')}</a>\n            <a href={`mailto:${appConfig.supportEmail}`} aria-label=\"Email support\">{Icon('mail')}</a>",
+            "            <a href={`mailto:${appConfig.supportEmail}`} aria-label=\"Email support\">{Icon('mail')}</a>"
+          );
+
+          content = content.replace(
+            "          <a href={appConfig.githubUrl}>GitHub</a>\n",
+            ""
+          );
+
+          content = content.replace(
+            "          <a href={appConfig.releasesUrl}>GitHub Releases</a>\n          <a href={`${appConfig.githubUrl}/issues`}>Report bug</a>",
+            "          <a href={`mailto:${appConfig.supportEmail}`}>Email support</a>"
+          );
+
+          content = content.replace(
+            "<p>© 2026 Arise. Open source under the MIT License.</p>",
+            "<p>© 2026 Arise. All rights reserved.</p>"
+          );
+
+          content = content.replace(
+            "          <a href=\"/privacy\" onClick={goPrivacy}>Privacy Policy</a>\n          <a href={`${appConfig.githubUrl}/blob/main/LICENSE`}>MIT License</a>",
+            "          <a href=\"/privacy\" onClick={goPrivacy}>Privacy Policy</a>"
+          );
+
+          fs.writeFileSync(path, content);
+          fs.rmSync('.github/workflows/apply-google-play-coming-soon.yml', { force: true });
+          NODE
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/main.jsx .github/workflows/apply-google-play-coming-soon.yml
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: update public availability messaging"
+            git push
+          fi
