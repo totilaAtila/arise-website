@@ -145,8 +145,8 @@ const permissions = [
 
 const faqs = [
   ['What devices does Arise work on?', 'Arise is designed for Android 8.0 / API 26 or newer. Some alarm permissions and lock-screen behavior can depend on Android version and device manufacturer settings.'],
-  ['Where can I download Arise?', 'Arise is not currently available for public download. The Google Play release is being prepared.'],
-  ['Is Arise free?', 'Core alarm features are planned to remain free after the Google Play launch. Some advanced features may later become available as a one-time purchase.'],
+  ['Where can I download Arise?', <>Arise is available in Early Access on <a href={appConfig.googlePlayUrl} target="_blank" rel="noopener noreferrer">Google Play</a>. Early testers can also join via the <a href={appConfig.googlePlayInternalUrl} target="_blank" rel="noopener noreferrer">internal test link</a>.</>],
+  ['Is Arise free?', 'Core alarm features are free. Some advanced features may later become available as a one-time purchase.'],
   ['Does it need an internet connection?', 'No. Arise works completely offline. It does not use external servers, analytics, advertising SDKs, or cloud sync.'],
   ['How does the gentle wake-up effect work?', 'The alarm volume gradually increases from a low level to full volume, while the active app theme fades in visually from darker tones to brighter colors in sync with the wake-up sequence.'],
   ['How do I stop the alarm?', 'The alarm is dismissed by swiping up. This helps reduce accidental dismissals while still keeping snooze easy to access.'],
@@ -246,13 +246,13 @@ function HomePage({ navigate }) {
     <>
       <section className="hero section-pad" id="top">
         <div className="hero-content">
-          <div className="pill">{Icon('star')} Google Play release is being prepared</div>
+          <div className="pill">{Icon('star')} Now available — Early Access on Google Play</div>
           <h1><span>Arise</span><br />Modern alarm clock for Android</h1>
           <p className="hero-copy">A beautifully animated alarm clock with custom themes, swipe-friendly navigation, expanded language support, gradual volume fade-in, lock-screen support, and fully offline operation.</p>
           <div className="cta-row">
-            <span className="button primary" aria-disabled="true">{Icon('store')} Google Play coming soon</span>
+            <a className="button primary" href={appConfig.googlePlayUrl} target="_blank" rel="noopener noreferrer">{Icon('download')} Download on Google Play</a>
           </div>
-          <p className="small-note">Arise is not currently available for public download.</p>
+          <p className="small-note">Arise is in Early Access on Google Play. <a href={appConfig.googlePlayInternalUrl} target="_blank" rel="noopener noreferrer">Early tester link →</a></p>
           <div className="quick-points">
             <span>{Icon('bell')} Multiple alarms</span>
             <span>{Icon('palette')} Custom themes</span>
@@ -289,14 +289,14 @@ function HomePage({ navigate }) {
       </section>
 
       <section className="section-pad full-features">
-        <SectionHeading eyebrow="Complete feature list" title="Prepared for Google Play" text="The public Google Play release is being prepared." />
+        <SectionHeading eyebrow="Complete feature list" title="Available on Google Play" text="Arise is now in Early Access on Google Play." />
         <div className="tabs-note">
           <span className="chip free">Free</span>
           <span className="chip premium">Premium — Coming soon</span>
         </div>
         <FeatureGroups />
         <div className="notice-card">
-          <strong>Note:</strong> Arise is not currently available for public download. The Google Play release is being prepared. Core alarm features are planned to remain free, while some advanced features may later become available as a one-time purchase.
+          <strong>Note:</strong> Arise is now available in <a href={appConfig.googlePlayUrl} target="_blank" rel="noopener noreferrer">Early Access on Google Play</a>. Core alarm features are free. Some advanced features may later become available as a one-time purchase.
         </div>
       </section>
 

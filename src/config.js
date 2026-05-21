@@ -4,7 +4,8 @@ export const appConfig = {
   supportEmail: 'ariseapplicationsupport@gmail.com',
   githubUrl: 'https://github.com/totilaAtila/Arise',
   releasesUrl: 'https://github.com/totilaAtila/Arise/releases',
-  googlePlayUrl: '',
+  googlePlayUrl: 'https://play.google.com/store/apps/details?id=com.arise.alarm',
+  googlePlayInternalUrl: 'https://play.google.com/apps/internaltest/4701487278692854374',
   version: '1.0',
   lastUpdated: 'April 2026',
 };
