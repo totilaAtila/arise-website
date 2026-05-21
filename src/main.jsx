@@ -251,8 +251,9 @@ function HomePage({ navigate }) {
           <p className="hero-copy">A beautifully animated alarm clock with custom themes, swipe-friendly navigation, expanded language support, gradual volume fade-in, lock-screen support, and fully offline operation.</p>
           <div className="cta-row">
             <a className="button primary" href={appConfig.googlePlayUrl} target="_blank" rel="noopener noreferrer">{Icon('download')} Download on Google Play</a>
+            <a className="button secondary" href={appConfig.googlePlayInternalUrl} target="_blank" rel="noopener noreferrer">{Icon('download')} Direct download link</a>
           </div>
-          <p className="small-note">Arise is in Early Access on Google Play. <a href={appConfig.googlePlayInternalUrl} target="_blank" rel="noopener noreferrer">Early tester link →</a></p>
+          <p className="small-note">Arise is in Early Access. Use the direct link if the Play Store page doesn't open.</p>
           <div className="quick-points">
             <span>{Icon('bell')} Multiple alarms</span>
             <span>{Icon('palette')} Custom themes</span>
