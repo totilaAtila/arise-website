@@ -2,6 +2,6 @@
   "rewrites": [
     { "source": "/privacy", "destination": "/index.html" },
     { "source": "/privacy-policy", "destination": "/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/((?!.well-known/).*)", "destination": "/index.html" }
   ]
 }

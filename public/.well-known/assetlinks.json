@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.arise.alarm",
+      "sha256_cert_fingerprints": [
+        "B6:40:10:E3:73:A9:30:72:55:7B:99:F1:D3:C5:E2:B7:EB:AB:38:13:C7:79:8A:89:08:B1:75:08:3F:E4:27:9C"
+      ]
+    }
+  }
+]
