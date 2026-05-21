@@ -147,6 +147,62 @@ section {
   gap: 4px;
 }
 
+.lang-selector {
+  position: relative;
+}
+
+.lang-button {
+  height: 50px;
+  padding: 0 14px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: var(--soft-shadow);
+  cursor: pointer;
+  font-weight: 850;
+  font-size: .85rem;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+
+.lang-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 160px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 2px;
+  z-index: 100;
+}
+
+.lang-dropdown button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 9px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-dropdown button:hover {
+  color: var(--ink);
+  background: rgba(211, 38, 53, 0.08);
+}
+
+.lang-dropdown button.active {
+  color: var(--primary);
+}
+
 .mobile-menu button,
 .mobile-menu a {
   text-align: left;

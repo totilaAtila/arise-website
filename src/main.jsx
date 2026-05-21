@@ -1,135 +1,126 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 import { appConfig } from './config.js';
+import { detectLang, getT } from './translations.js';
 
 const icon = '/assets/brand/icon_512.png';
 
-const screenshots = [
-  {
-    src: '/assets/screenshots/HomeScreen.png',
-    title: 'Home screen',
-    description: 'Create and manage alarms with a clean animated interface.',
-  },
-  {
-    src: '/assets/screenshots/MultipleAlarms.jpg',
-    title: 'Multiple alarms',
-    description: 'Keep several alarms ready for different routines.',
-  },
-  {
-    src: '/assets/screenshots/AlarmSelect.png',
-    title: 'Edit alarm',
-    description: 'Set the alarm time, label, repeat days, wake-up options, vibration, and snooze duration.',
-  },
-  {
-    src: '/assets/screenshots/LockScreenAlarm.jpg',
-    title: 'Lock-screen alarm',
-    description: 'Snooze with one tap or swipe up to stop.',
-  },
-  {
-    src: '/assets/screenshots/clock.jpg',
-    title: 'Clock',
-    description: 'View the current time in a calm full-screen layout.',
-  },
-  {
-    src: '/assets/screenshots/Timer.jpg',
-    title: 'Timer',
-    description: 'Set countdowns for daily tasks and routines.',
-  },
-  {
-    src: '/assets/screenshots/Stopwatch.jpg',
-    title: 'Stopwatch',
-    description: 'Measure time precisely with a dedicated stopwatch.',
-  },
-  {
-    src: '/assets/screenshots/OceanTheme.png',
-    title: 'Ocean theme',
-    description: 'Choose from polished built-in visual presets.',
-  },
-  {
-    src: '/assets/screenshots/GreenCustomTheme.png',
-    title: 'Custom themes',
-    description: 'Create a personal look using custom colors.',
-  },
-  {
-    src: '/assets/screenshots/RingTonesFilePicker.png',
-    title: 'Audio picker',
-    description: 'Pick alarm tones from available sounds or local audio files.',
-  },
-  {
-    src: '/assets/screenshots/Permissions.png',
-    title: 'Permission shortcuts',
-    description: 'Open Android settings quickly for alarm-related permissions.',
-  },
-];
+const LangContext = createContext(() => '');
 
-const features = [
-  {
-    group: 'Smart alarms',
-    items: [
-      ['Multiple alarms', 'Set alarms for any day of the week.', 'bell', 'free'],
-      ['5 default tones', 'Meadow Dance, Up Beat, Quiet Mind, 7 AM, and Morning Meadow.', 'music', 'free'],
-      ['Audio file picker', 'Choose an alarm tone from your device.', 'fileMusic', 'premium'],
-      ['Different tone per alarm', 'Customize the sound for each alarm separately.', 'sparkles', 'premium'],
-    ],
-  },
-  {
-    group: 'Gentle wake-up',
-    items: [
-      ['Volume fade-in', 'Volume gradually increases from 5% to 100%.', 'volume', 'free'],
-      ['Theme-based fade-in', 'The active app theme fades in from darker tones to brighter colors during the wake-up sequence.', 'sunrise', 'free'],
-      ['Smart snooze', 'Large snooze button with automatically decreasing duration.', 'hand', 'free'],
-      ['Swipe up to stop', 'Protection against accidentally dismissing the alarm.', 'shield', 'free'],
-      ['Circular snooze screen', 'A large glass-style snooze control with animated swipe-up guidance.', 'hand', 'free'],
-    ],
-  },
-  {
-    group: 'Timer & stopwatch',
-    items: [
-      ['Configurable timer', 'Set any duration with an optional sound at the end.', 'timer', 'free'],
-      ['Precise stopwatch', 'Stopwatch with milliseconds for exact measurements.', 'stopwatch', 'free'],
-      ['Swipe-friendly navigation', 'Move naturally between main screens without interfering with vertical scrolling.', 'hand', 'free'],
-    ],
-  },
-  {
-    group: 'Customization',
-    items: [
-      ['4 preset themes', 'Classic, Aurora, Sunrise, and Ocean.', 'palette', 'free'],
-      ['Editable custom themes', 'Create, reopen, and refine your own visual themes.', 'sparkles', 'premium'],
-      ['3-zone colour editor', 'Drag colour zones directly on the preview to shape the background.', 'palette', 'premium'],
-      ['Fine visual tuning', 'Adjust brightness, tone, colour purity, and orb behaviour for custom themes.', 'settings', 'premium'],
-      ['Flexible time format', 'Choose between 12-hour or 24-hour time format.', 'calendar', 'free'],
-    ],
-  },
+function getScreenshots(t) {
+  return [
+    { src: '/assets/screenshots/HomeScreen.png', title: t('ss_home_t'), description: t('ss_home_d') },
+    { src: '/assets/screenshots/MultipleAlarms.jpg', title: t('ss_multi_t'), description: t('ss_multi_d') },
+    { src: '/assets/screenshots/AlarmSelect.png', title: t('ss_edit_t'), description: t('ss_edit_d') },
+    { src: '/assets/screenshots/LockScreenAlarm.jpg', title: t('ss_lock_t'), description: t('ss_lock_d') },
+    { src: '/assets/screenshots/clock.jpg', title: t('ss_clock_t'), description: t('ss_clock_d') },
+    { src: '/assets/screenshots/Timer.jpg', title: t('ss_timer_t'), description: t('ss_timer_d') },
+    { src: '/assets/screenshots/Stopwatch.jpg', title: t('ss_stop_t'), description: t('ss_stop_d') },
+    { src: '/assets/screenshots/OceanTheme.png', title: t('ss_ocean_t'), description: t('ss_ocean_d') },
+    { src: '/assets/screenshots/GreenCustomTheme.png', title: t('ss_custom_t'), description: t('ss_custom_d') },
+    { src: '/assets/screenshots/RingTonesFilePicker.png', title: t('ss_audio_t'), description: t('ss_audio_d') },
+    { src: '/assets/screenshots/Permissions.png', title: t('ss_perm_t'), description: t('ss_perm_d') },
+  ];
+}
 
-  {
-    group: 'Language & navigation',
-    items: [
-      ['In-app language selector', 'Choose the app language from Settings without changing the whole phone.', 'globe', 'free'],
-      ['Expanded localization', 'Language support has been expanded beyond English and Romanian for a broader international release.', 'fileText', 'free'],
-      ['Directional swipe transitions', 'Screen transitions follow the direction of your swipe for a more natural feel.', 'chevronRight', 'free'],
-    ],
-  },
-  {
-    group: 'Reliability',
-    items: [
-      ['Do Not Disturb support', 'Alarm sound can work through Do Not Disturb when the required Android permission is granted.', 'moon', 'free'],
-      ['Lock-screen support', 'The alarm screen is designed to appear and work on the lock screen.', 'phone', 'free'],
-      ['Settings shortcuts', 'Quick access to Android settings for alarm-related permissions.', 'settings', 'free'],
-      ['Safer alarm deletion', 'Alarm deletion uses confirmation instead of accidental swipe removal.', 'shield', 'free'],
-      ['Boot persistence', 'Enabled alarms are rescheduled after the device restarts.', 'rotate', 'free'],
-    ],
-  },
-];
+function getFeatures(t) {
+  return [
+    {
+      group: t('fg_smart'),
+      items: [
+        [t('fi_multi_t'), t('fi_multi_d'), 'bell', 'free'],
+        [t('fi_tones_t'), t('fi_tones_d'), 'music', 'free'],
+        [t('fi_picker_t'), t('fi_picker_d'), 'fileMusic', 'premium'],
+        [t('fi_difftone_t'), t('fi_difftone_d'), 'sparkles', 'premium'],
+      ],
+    },
+    {
+      group: t('fg_gentle'),
+      items: [
+        [t('fi_vol_t'), t('fi_vol_d'), 'volume', 'free'],
+        [t('fi_themefade_t'), t('fi_themefade_d'), 'sunrise', 'free'],
+        [t('fi_snooze_t'), t('fi_snooze_d'), 'hand', 'free'],
+        [t('fi_swipestop_t'), t('fi_swipestop_d'), 'shield', 'free'],
+        [t('fi_circular_t'), t('fi_circular_d'), 'hand', 'free'],
+      ],
+    },
+    {
+      group: t('fg_timer'),
+      items: [
+        [t('fi_timer_t'), t('fi_timer_d'), 'timer', 'free'],
+        [t('fi_sw_t'), t('fi_sw_d'), 'stopwatch', 'free'],
+        [t('fi_swipenav_t'), t('fi_swipenav_d'), 'hand', 'free'],
+      ],
+    },
+    {
+      group: t('fg_custom'),
+      items: [
+        [t('fi_preset_t'), t('fi_preset_d'), 'palette', 'free'],
+        [t('fi_edittheme_t'), t('fi_edittheme_d'), 'sparkles', 'premium'],
+        [t('fi_3zone_t'), t('fi_3zone_d'), 'palette', 'premium'],
+        [t('fi_finetune_t'), t('fi_finetune_d'), 'settings', 'premium'],
+        [t('fi_timefmt_t'), t('fi_timefmt_d'), 'calendar', 'free'],
+      ],
+    },
+    {
+      group: t('fg_lang'),
+      items: [
+        [t('fi_langsel_t'), t('fi_langsel_d'), 'globe', 'free'],
+        [t('fi_expandloc_t'), t('fi_expandloc_d'), 'fileText', 'free'],
+        [t('fi_swipenav2_t'), t('fi_swipenav2_d'), 'chevronRight', 'free'],
+      ],
+    },
+    {
+      group: t('fg_rely'),
+      items: [
+        [t('fi_dnd_t'), t('fi_dnd_d'), 'moon', 'free'],
+        [t('fi_lockscr_t'), t('fi_lockscr_d'), 'phone', 'free'],
+        [t('fi_settshort_t'), t('fi_settshort_d'), 'settings', 'free'],
+        [t('fi_safedel_t'), t('fi_safedel_d'), 'shield', 'free'],
+        [t('fi_boot_t'), t('fi_boot_d'), 'rotate', 'free'],
+      ],
+    },
+  ];
+}
 
-const privacyCards = [
-  ['Local storage', 'Alarms, settings, selected sounds, and custom themes stay on your device.', 'database'],
-  ['No internet', 'Arise works completely offline and has no external servers.', 'wifiOff'],
-  ['No tracking', 'No analytics, no ads, no tracking tools, and no third-party data sharing.', 'eyeOff'],
-  ['Minimal permissions', 'Only permissions required for reliable alarm functionality are requested.', 'lock'],
-  ['Private source code', 'The Arise source code is private and is not available for public download.', 'shield'],
-  ['No account required', 'No sign-up, no login, and no personal profile.', 'fileText'],
-];
+function getPrivacyCards(t) {
+  return [
+    [t('pc_stor_t'), t('pc_stor_d'), 'database'],
+    [t('pc_net_t'), t('pc_net_d'), 'wifiOff'],
+    [t('pc_track_t'), t('pc_track_d'), 'eyeOff'],
+    [t('pc_perm_t'), t('pc_perm_d'), 'lock'],
+    [t('pc_src_t'), t('pc_src_d'), 'shield'],
+    [t('pc_acct_t'), t('pc_acct_d'), 'fileText'],
+  ];
+}
+
+function getFaqs(t) {
+  return [
+    [t('faq_q1'), t('faq_a1')],
+    [
+      t('faq_q2'),
+      <>
+        {t('faq_a2p1')}
+        <a href={appConfig.googlePlayUrl} target="_blank" rel="noopener noreferrer">{t('faq_a2play')}</a>
+        {t('faq_a2p2')}
+        <a href={appConfig.googlePlayInternalUrl} target="_blank" rel="noopener noreferrer">{t('faq_a2internal')}</a>
+        {t('faq_a2p3')}
+      </>,
+    ],
+    [t('faq_q3'), t('faq_a3')],
+    [t('faq_q4'), t('faq_a4')],
+    [t('faq_q5'), t('faq_a5')],
+    [t('faq_q6'), t('faq_a6')],
+    [t('faq_q7'), t('faq_a7')],
+    [t('faq_q8'), t('faq_a8')],
+    [t('faq_q9'), t('faq_a9')],
+    [t('faq_q10'), t('faq_a10')],
+    [t('faq_q11'), t('faq_a11')],
+    [t('faq_q12'), t('faq_a12')],
+    [t('faq_q13'), t('faq_a13')],
+  ];
+}
 
 const permissions = [
   ['SCHEDULE_EXACT_ALARM / USE_EXACT_ALARM', 'Fire alarms at the exact scheduled time.'],
@@ -143,25 +134,16 @@ const permissions = [
   ['READ_MEDIA_AUDIO', 'Let you pick a custom audio file as an alarm tone.'],
 ];
 
-const faqs = [
-  ['What devices does Arise work on?', 'Arise is designed for Android 8.0 / API 26 or newer. Some alarm permissions and lock-screen behavior can depend on Android version and device manufacturer settings.'],
-  ['Where can I download Arise?', <>Arise is available in Early Access on <a href={appConfig.googlePlayUrl} target="_blank" rel="noopener noreferrer">Google Play</a>. Early testers can also join via the <a href={appConfig.googlePlayInternalUrl} target="_blank" rel="noopener noreferrer">internal test link</a>.</>],
-  ['Is Arise free?', 'Core alarm features are free. Some advanced features may later become available as a one-time purchase.'],
-  ['Does it need an internet connection?', 'No. Arise works completely offline. It does not use external servers, analytics, advertising SDKs, or cloud sync.'],
-  ['How does the gentle wake-up effect work?', 'The alarm volume gradually increases from a low level to full volume, while the active app theme fades in visually from darker tones to brighter colors in sync with the wake-up sequence.'],
-  ['How do I stop the alarm?', 'The alarm is dismissed by swiping up. This helps reduce accidental dismissals while still keeping snooze easy to access.'],
-  ['Does the alarm sound when the phone is on Do Not Disturb?', 'Arise supports Do Not Disturb override when the required Android permission is granted. The exact behavior may depend on Android settings and device manufacturer restrictions.'],
-  ['Can I create custom themes?', 'Yes. Arise includes preset themes, editable custom themes, a 3-zone colour editor, and fine tuning controls for brightness, tone, colour purity, and background orb behaviour. Some advanced customization features may later become available as premium features.'],
-  ['What time formats are available?', 'Arise supports both 12-hour and 24-hour time formats.'],
-  ['Which languages does Arise support?', 'Arise includes an in-app language selector and expanded localization for a broader international release.'],
-  ['Why does Arise request exact alarm permissions?', 'Exact alarm permissions are required so scheduled alarms can fire at the intended time instead of being delayed by Android power management.'],
-  ['Why does Arise ask to ignore battery optimization?', 'Some Android devices aggressively delay background alarm work. This permission helps keep alarms reliable.'],
-  ['Is the source code available?', 'No. The Arise source code is private.'],
-];
-
 function App() {
   const [route, setRoute] = useState(getRoute());
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lang, setLang] = useState(detectLang);
+  const t = useMemo(() => getT(lang), [lang]);
+
+  const changeLang = (code) => {
+    setLang(code);
+    localStorage.setItem('arise-lang', code);
+  };
 
   useEffect(() => {
     const onPopState = () => setRoute(getRoute());
@@ -184,10 +166,10 @@ function App() {
   };
 
   return (
-    <>
-      <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} navigate={navigate} isPrivacy={isPrivacy} />
+    <LangContext.Provider value={t}>
+      <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} navigate={navigate} isPrivacy={isPrivacy} lang={lang} setLang={changeLang} />
       <main>{isPrivacy ? <PrivacyPage /> : <HomePage navigate={navigate} />}</main>
-    </>
+    </LangContext.Provider>
   );
 }
 
@@ -195,19 +177,61 @@ function getRoute() {
   return window.location.pathname.replace(/\/$/, '') || '/';
 }
 
-function Header({ menuOpen, setMenuOpen, navigate, isPrivacy }) {
+function LangSelector({ lang, setLang }) {
+  const t = useContext(LangContext);
+  const [open, setOpen] = useState(false);
+  const langs = [
+    { code: 'en', flag: '🇬🇧' },
+    { code: 'ro', flag: '🇷🇴' },
+    { code: 'pl', flag: '🇵🇱' },
+    { code: 'hu', flag: '🇭🇺' },
+  ];
+
+  useEffect(() => {
+    if (!open) return;
+    const close = (e) => {
+      if (!e.target.closest('.lang-selector')) setOpen(false);
+    };
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [open]);
+
+  return (
+    <div className="lang-selector">
+      <button className="lang-button" onClick={() => setOpen((o) => !o)} aria-label={t('lang_select')}>
+        {lang.toUpperCase()}
+      </button>
+      {open && (
+        <div className="lang-dropdown">
+          {langs.map(({ code, flag }) => (
+            <button
+              key={code}
+              className={lang === code ? 'active' : ''}
+              onClick={() => { setLang(code); setOpen(false); }}
+            >
+              {flag} {t(`lang_${code}`)}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Header({ menuOpen, setMenuOpen, navigate, isPrivacy, lang, setLang }) {
+  const t = useContext(LangContext);
   const links = isPrivacy
     ? [
-        ['Home', '/'],
-        ['Policy', '#policy'],
-        ['Permissions', '#permissions'],
-        ['FAQ', '#faq'],
+        [t('nav_home'), '/'],
+        [t('nav_policy'), '#policy'],
+        [t('nav_permissions'), '#permissions'],
+        [t('nav_faq'), '#faq'],
       ]
     : [
-        ['Features', '#features'],
-        ['Gallery', '#gallery'],
-        ['Privacy', '#privacy'],
-        ['FAQ', '#faq'],
+        [t('nav_features'), '#features'],
+        [t('nav_gallery'), '#gallery'],
+        [t('nav_privacy'), '#privacy'],
+        [t('nav_faq'), '#faq'],
       ];
 
   return (
@@ -218,10 +242,11 @@ function Header({ menuOpen, setMenuOpen, navigate, isPrivacy }) {
       </a>
       <nav className="desktop-nav" aria-label="Main navigation">
         {links.map(([label, href]) => (
-          <button key={label} onClick={() => navigate(href)}>{label}</button>
+          <button key={href} onClick={() => navigate(href)}>{label}</button>
         ))}
       </nav>
       <div className="header-actions">
+        <LangSelector lang={lang} setLang={setLang} />
         <a className="icon-button" href="/privacy" aria-label="Privacy Policy" onClick={(event) => { event.preventDefault(); navigate('/privacy'); }}>
           {Icon('globe')}
         </a>
@@ -232,9 +257,9 @@ function Header({ menuOpen, setMenuOpen, navigate, isPrivacy }) {
       {menuOpen && (
         <div className="mobile-menu">
           {links.map(([label, href]) => (
-            <button key={label} onClick={() => navigate(href)}>{label}</button>
+            <button key={href} onClick={() => navigate(href)}>{label}</button>
           ))}
-          <a href={`mailto:${appConfig.supportEmail}`}>Contact</a>
+          <a href={`mailto:${appConfig.supportEmail}`}>{t('nav_contact')}</a>
         </div>
       )}
     </header>
@@ -242,62 +267,68 @@ function Header({ menuOpen, setMenuOpen, navigate, isPrivacy }) {
 }
 
 function HomePage({ navigate }) {
+  const t = useContext(LangContext);
+  const privacyCards = useMemo(() => getPrivacyCards(t), [t]);
+
   return (
     <>
       <section className="hero section-pad" id="top">
         <div className="hero-content">
-          <div className="pill">{Icon('star')} Now available — Early Access on Google Play</div>
-          <h1><span>Arise</span><br />Modern alarm clock for Android</h1>
-          <p className="hero-copy">A beautifully animated alarm clock with custom themes, swipe-friendly navigation, expanded language support, gradual volume fade-in, lock-screen support, and fully offline operation.</p>
+          <div className="pill">{Icon('star')} {t('hero_pill')}</div>
+          <h1><span>Arise</span><br />{t('hero_tagline')}</h1>
+          <p className="hero-copy">{t('hero_copy')}</p>
           <div className="cta-row">
-            <a className="button primary" href={appConfig.googlePlayUrl} target="_blank" rel="noopener noreferrer">{Icon('download')} Download on Google Play</a>
-            <a className="button secondary" href={appConfig.googlePlayInternalUrl} target="_blank" rel="noopener noreferrer">{Icon('download')} Direct download link</a>
+            <a className="button primary" href={appConfig.googlePlayUrl} target="_blank" rel="noopener noreferrer">{Icon('download')} {t('hero_cta_primary')}</a>
+            <a className="button secondary" href={appConfig.googlePlayInternalUrl} target="_blank" rel="noopener noreferrer">{Icon('download')} {t('hero_cta_secondary')}</a>
           </div>
-          <p className="small-note">Arise is in Early Access. Use the direct link if the Play Store page doesn't open.</p>
+          <p className="small-note">{t('hero_note')}</p>
           <div className="quick-points">
-            <span>{Icon('bell')} Multiple alarms</span>
-            <span>{Icon('palette')} Custom themes</span>
-            <span>{Icon('volume')} Volume fade-in</span>
-            <span>{Icon('eyeOff')} No tracking</span>
+            <span>{Icon('bell')} {t('hero_point_alarms')}</span>
+            <span>{Icon('palette')} {t('hero_point_themes')}</span>
+            <span>{Icon('volume')} {t('hero_point_volume')}</span>
+            <span>{Icon('eyeOff')} {t('hero_point_privacy')}</span>
           </div>
         </div>
         <HeroDevice />
       </section>
 
       <section className="section-pad compact" id="features">
-        <SectionHeading eyebrow="Features" title="Everything needed for a reliable wake-up" text="Arise combines alarm reliability, visual customization, gentle wake-up behavior, and offline privacy." />
+        <SectionHeading eyebrow={t('features_eyebrow')} title={t('features_title')} text={t('features_text')} />
         <div className="feature-summary-grid">
-          <SummaryCard iconName="alarm" title="Reliable alarms" text="Exact scheduling, boot persistence, lock-screen support, and Android settings shortcuts." />
-          <SummaryCard iconName="sunrise" title="Gentle wake-up" text="Volume fade-in, sunrise animation, snooze, and swipe-to-stop protection." />
-          <SummaryCard iconName="palette" title="Personal design" text="Preset themes, editable custom themes, fine visual controls, and animated backgrounds." />
-          <SummaryCard iconName="globe" title="Localized experience" text="Expanded language support with an in-app language selector." />
+          <SummaryCard iconName="alarm" title={t('features_card1_title')} text={t('features_card1_text')} />
+          <SummaryCard iconName="sunrise" title={t('features_card2_title')} text={t('features_card2_text')} />
+          <SummaryCard iconName="palette" title={t('features_card3_title')} text={t('features_card3_text')} />
+          <SummaryCard iconName="globe" title={t('features_card4_title')} text={t('features_card4_text')} />
         </div>
       </section>
 
       <section className="section-pad gallery-section" id="gallery">
-        <SectionHeading eyebrow="Gallery" title="Explore the Arise interface" text="Real app screenshots presented in a mobile-first gallery." />
+        <SectionHeading eyebrow={t('gallery_eyebrow')} title={t('gallery_title')} text={t('gallery_text')} />
         <Gallery />
       </section>
 
       <section className="section-pad privacy-teaser" id="privacy">
-        <SectionHeading eyebrow="Privacy" title="Privacy by design" text="Arise does not collect, store, share, or transmit personal data. Everything stays on your device." />
+        <SectionHeading eyebrow={t('privacy_eyebrow')} title={t('privacy_title')} text={t('privacy_text')} />
         <div className="privacy-grid">
-          {privacyCards.slice(0, 6).map(([title, text, iconName]) => <SummaryCard key={title} iconName={iconName} title={title} text={text} />)}
+          {privacyCards.slice(0, 6).map(([title, text, iconName], i) => <SummaryCard key={i} iconName={iconName} title={title} text={text} />)}
         </div>
         <div className="center-row">
-          <button className="button primary" onClick={() => navigate('/privacy')}>Read full Privacy Policy</button>
+          <button className="button primary" onClick={() => navigate('/privacy')}>{t('privacy_btn')}</button>
         </div>
       </section>
 
       <section className="section-pad full-features">
-        <SectionHeading eyebrow="Complete feature list" title="Available on Google Play" text="Arise is now in Early Access on Google Play." />
+        <SectionHeading eyebrow={t('full_eyebrow')} title={t('full_title')} text={t('full_text')} />
         <div className="tabs-note">
-          <span className="chip free">Free</span>
-          <span className="chip premium">Premium — Coming soon</span>
+          <span className="chip free">{t('full_chip_free')}</span>
+          <span className="chip premium">{t('full_chip_premium')}</span>
         </div>
         <FeatureGroups />
         <div className="notice-card">
-          <strong>Note:</strong> Arise is now available in <a href={appConfig.googlePlayUrl} target="_blank" rel="noopener noreferrer">Early Access on Google Play</a>. Core alarm features are free. Some advanced features may later become available as a one-time purchase.
+          <strong>{t('full_note_label')}</strong>{' '}
+          {t('full_notice_pre')}
+          <a href={appConfig.googlePlayUrl} target="_blank" rel="noopener noreferrer">{t('full_notice_link')}</a>
+          {t('full_notice_post')}
         </div>
       </section>
 
@@ -308,32 +339,35 @@ function HomePage({ navigate }) {
 }
 
 function PrivacyPage() {
+  const t = useContext(LangContext);
+  const privacyCards = useMemo(() => getPrivacyCards(t), [t]);
+
   return (
     <>
       <section className="section-pad privacy-page-hero" id="policy">
         <div className="privacy-icon">{Icon('shield')}</div>
-        <h1>Privacy Policy</h1>
-        <p>Arise respects your privacy by design. The app does not collect, store, share, or transmit personal data.</p>
+        <h1>{t('pp_title')}</h1>
+        <p>{t('pp_intro')}</p>
         <div className="policy-meta">
-          <span><strong>Version:</strong> {appConfig.version}</span>
-          <span><strong>Last updated:</strong> {appConfig.lastUpdated}</span>
+          <span><strong>{t('pp_version')}</strong> {appConfig.version}</span>
+          <span><strong>{t('pp_updated')}</strong> {appConfig.lastUpdated}</span>
         </div>
       </section>
 
       <section className="section-pad policy-content">
         <div className="policy-card wide">
-          <h2>Summary</h2>
-          <p>Arise works completely offline. The app does not use analytics, advertising SDKs, tracking tools, cloud sync, or external servers.</p>
-          <p>All app data, including alarms, settings, selected sounds, and custom themes, is stored locally on your device.</p>
+          <h2>{t('pp_summary_title')}</h2>
+          <p>{t('pp_summary_p1')}</p>
+          <p>{t('pp_summary_p2')}</p>
         </div>
 
         <div className="privacy-grid policy-grid">
-          {privacyCards.map(([title, text, iconName]) => <SummaryCard key={title} iconName={iconName} title={title} text={text} />)}
+          {privacyCards.map(([title, text, iconName], i) => <SummaryCard key={i} iconName={iconName} title={title} text={text} />)}
         </div>
 
         <div className="policy-card wide" id="permissions">
-          <h2>Permissions used</h2>
-          <p>Arise requests the following Android permissions exclusively for alarm functionality.</p>
+          <h2>{t('pp_perm_title')}</h2>
+          <p>{t('pp_perm_intro')}</p>
           <div className="permission-list">
             {permissions.map(([permission, purpose]) => (
               <div className="permission-card" key={permission}>
@@ -345,13 +379,13 @@ function PrivacyPage() {
         </div>
 
         <div className="policy-card wide">
-          <h2>Android backup note</h2>
-          <p>Alarm configuration may be included in Android's standard device backup to your Google account if Android Auto Backup is enabled on your device.</p>
+          <h2>{t('pp_backup_title')}</h2>
+          <p>{t('pp_backup_text')}</p>
         </div>
 
         <div className="policy-card wide">
-          <h2>Contact</h2>
-          <p>For questions about this policy, contact us at <a href={`mailto:${appConfig.supportEmail}`}>{appConfig.supportEmail}</a>.</p>
+          <h2>{t('pp_contact_title')}</h2>
+          <p>{t('pp_contact_text')} <a href={`mailto:${appConfig.supportEmail}`}>{appConfig.supportEmail}</a>.</p>
         </div>
       </section>
 
@@ -382,17 +416,20 @@ function SummaryCard({ iconName, title, text }) {
 }
 
 function FeatureGroups() {
+  const t = useContext(LangContext);
+  const features = useMemo(() => getFeatures(t), [t]);
+
   return (
     <div className="feature-groups">
-      {features.map((group) => (
-        <section className="feature-group" key={group.group}>
+      {features.map((group, gi) => (
+        <section className="feature-group" key={gi}>
           <h3>{group.group}</h3>
           <div className="feature-cards">
-            {group.items.map(([title, text, iconName, tier]) => (
-              <article className={`feature-card ${tier === 'premium' ? 'is-premium' : ''}`} key={title}>
+            {group.items.map(([title, text, iconName, tier], ii) => (
+              <article className={`feature-card ${tier === 'premium' ? 'is-premium' : ''}`} key={ii}>
                 <div className="card-icon">{Icon(iconName)}</div>
                 <div>
-                  <h4>{title} {tier === 'premium' && <span>Premium</span>}</h4>
+                  <h4>{title} {tier === 'premium' && <span>{t('feature_premium')}</span>}</h4>
                   <p>{text}</p>
                 </div>
               </article>
@@ -405,29 +442,31 @@ function FeatureGroups() {
 }
 
 function Gallery() {
+  const t = useContext(LangContext);
+  const screenshots = useMemo(() => getScreenshots(t), [t]);
   const [index, setIndex] = useState(0);
   const current = screenshots[index];
-  const next = () => setIndex((value) => (value + 1) % screenshots.length);
-  const prev = () => setIndex((value) => (value - 1 + screenshots.length) % screenshots.length);
+  const next = () => setIndex((v) => (v + 1) % screenshots.length);
+  const prev = () => setIndex((v) => (v - 1 + screenshots.length) % screenshots.length);
 
   return (
     <div className="gallery-wrap">
-      <button className="gallery-button left" aria-label="Previous screenshot" onClick={prev}>{Icon('chevronLeft')}</button>
+      <button className="gallery-button left" aria-label={t('gallery_prev')} onClick={prev}>{Icon('chevronLeft')}</button>
       <div className="phone-frame gallery-phone">
         <img src={current.src} alt={`${current.title} screenshot`} />
       </div>
-      <button className="gallery-button right" aria-label="Next screenshot" onClick={next}>{Icon('chevronRight')}</button>
+      <button className="gallery-button right" aria-label={t('gallery_next')} onClick={next}>{Icon('chevronRight')}</button>
       <div className="gallery-caption">
         <h3>{current.title}</h3>
         <p>{current.description}</p>
       </div>
       <div className="gallery-dots" aria-label="Screenshot selector">
-        {screenshots.map((item, itemIndex) => (
+        {screenshots.map((item, i) => (
           <button
-            key={item.title}
+            key={i}
             aria-label={`Show ${item.title}`}
-            className={itemIndex === index ? 'active' : ''}
-            onClick={() => setIndex(itemIndex)}
+            className={i === index ? 'active' : ''}
+            onClick={() => setIndex(i)}
           />
         ))}
       </div>
@@ -446,11 +485,14 @@ function HeroDevice() {
 }
 
 function FaqSection() {
+  const t = useContext(LangContext);
+  const faqs = useMemo(() => getFaqs(t), [t]);
+
   return (
     <section className="section-pad faq-section" id="faq">
-      <SectionHeading eyebrow="FAQ" title="Frequently asked questions" text="Answers to common questions about Arise, permissions, downloads, and privacy." />
+      <SectionHeading eyebrow={t('faq_eyebrow')} title={t('faq_title')} text={t('faq_text')} />
       <div className="faq-list">
-        {faqs.map(([question, answer], index) => <FaqItem key={question} question={question} answer={answer} defaultOpen={index === 0} />)}
+        {faqs.map(([question, answer], i) => <FaqItem key={i} question={question} answer={answer} defaultOpen={i === 0} />)}
       </div>
     </section>
   );
@@ -470,6 +512,7 @@ function FaqItem({ question, answer, defaultOpen }) {
 }
 
 function Footer({ navigate }) {
+  const t = useContext(LangContext);
   const goPrivacy = (event) => {
     if (!navigate) return;
     event.preventDefault();
@@ -480,27 +523,27 @@ function Footer({ navigate }) {
       <div className="footer-main">
         <div>
           <div className="footer-brand"><img src={icon} alt="" /><strong>Arise</strong></div>
-          <p>Modern alarm clock for Android with customizable themes, volume fade-in, and completely offline functionality.</p>
+          <p>{t('footer_tagline')}</p>
           <div className="footer-icons">
-            <a href={`mailto:${appConfig.supportEmail}`} aria-label="Email support">{Icon('mail')}</a>
+            <a href={`mailto:${appConfig.supportEmail}`} aria-label={t('footer_email_support')}>{Icon('mail')}</a>
           </div>
         </div>
         <div>
-          <h3>Links</h3>
-          <a href="/#gallery">Gallery</a>
-          <a href="/privacy" onClick={goPrivacy}>Privacy</a>
-          <a href="/#faq">FAQ</a>
+          <h3>{t('footer_links')}</h3>
+          <a href="/#gallery">{t('nav_gallery')}</a>
+          <a href="/privacy" onClick={goPrivacy}>{t('nav_privacy')}</a>
+          <a href="/#faq">{t('nav_faq')}</a>
         </div>
         <div>
-          <h3>Contact</h3>
+          <h3>{t('footer_contact')}</h3>
           <a href={`mailto:${appConfig.supportEmail}`}>{appConfig.supportEmail}</a>
-          <a href={`mailto:${appConfig.supportEmail}`}>Email support</a>
+          <a href={`mailto:${appConfig.supportEmail}`}>{t('footer_email_support')}</a>
         </div>
       </div>
       <div className="footer-bottom">
-        <p>© 2026 Arise. All rights reserved.</p>
+        <p>{t('footer_copyright')}</p>
         <div>
-          <a href="/privacy" onClick={goPrivacy}>Privacy Policy</a>
+          <a href="/privacy" onClick={goPrivacy}>{t('pp_title')}</a>
         </div>
       </div>
     </footer>
