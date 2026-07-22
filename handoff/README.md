@@ -8,17 +8,22 @@ into your repo and serve as-is. The 4-language translation system is kept.
 ```
 index.html            static markup (semantic HTML, no framework)
 src/styles.css        all styles, two themes via [data-theme]
-src/app.js            vanilla JS: i18n, theme, language, routing, gallery, FAQ
-src/translations.js   copy for all 4 languages (en, ro, pl, hu)  ← source of truth
+src/app.js            vanilla JS: i18n, theme, language, routing, gallery, FAQ, scroll indicator
+src/i18n/index.js     language list, detection, permission codes, translations map
+src/i18n/<code>.js    copy for one language — en is the source of truth for structure
 assets/               brand icon + screenshots
 ```
+
+Nine languages ship: `en, de, fr, lv, lt, hu, pl, ro, ru`. Adding a tenth means copying
+`src/i18n/en.js`, translating the values, then registering it in `src/i18n/index.js`
+(one `import` plus one entry in `translations` and in `LANGS`).
 
 ## How it maps to your current repo
 
 - **`index.html`** — replaces the current React entry. It no longer loads `/src/main.jsx`;
   it loads `./src/styles.css` and `./src/app.js` (a plain ES module).
 - **`src/styles.css`** — replaces the old CSS. Class-based, not inline.
-- **`src/translations.js`** — see "Copy changes" below; reconcile keys, keep all 4 languages.
+- **`src/i18n/`** — see "Copy changes" below; reconcile keys, keep every language in sync.
 - **Assets** — I included `assets/` so the package runs standalone. In your repo the
   screenshots live in `public/assets/`, served at `/assets/`. Either keep `assets/` next to
   `index.html`, or change the paths in `index.html` + `src/app.js` from `assets/...` to
@@ -28,15 +33,21 @@ assets/               brand icon + screenshots
 ## Behaviour
 
 - **Default theme = dark (Nightfall).** Persisted in `localStorage['arise-theme']`.
-- **Language** auto-detected, persisted in `localStorage['arise-lang']` (same key as before).
+- **Language** resolved in this order: `?lang=de` in the URL → `localStorage['arise-lang']` →
+  the device languages from `navigator.languages`, in the user's own priority order → English.
+  Regional tags fold to their base language (`de-AT` → `de`, `fr-CA` → `fr`).
+- **Scroll indicator** — the nav entry for the section you are in is underlined, and a progress
+  bar sits on the bottom edge of the header. Nav entries are in document order; sections without
+  their own entry fold into the neighbouring one (`#themes` → Gallery).
+- **Feature list** — below 700px each feature group collapses into an accordion.
 - Home ↔ Privacy handled by JS (show/hide `<main>`), not URL routes. If you need real
   `/privacy` routing, wire `goPrivacy()` / `goHome()` to `history.pushState`.
 
 ## Translation structure
 
-`translations.js` exports `translations`, `LANGS`, `detectLang`, `PERMISSION_CODES`.
-Each language object uses **string keys** for single texts and **arrays** for repeating
-blocks:
+`src/i18n/index.js` exports `translations`, `LANGS`, `detectLang`, `storeLang`,
+`PERMISSION_CODES`. Each language module default-exports one object that uses **string keys**
+for single texts and **arrays** for repeating blocks:
 
 - `why[]`, `cards[]`  → `[iconName, title, text]`
 - `groups[]`          → `[groupTitle, [[iconName, title, text], …]]`
@@ -44,7 +55,11 @@ blocks:
 - `faqs[]`            → `[question, answer]`
 - `perms[]`           → purpose text, order matches `PERMISSION_CODES`
 
-## Copy changes vs. the original site (to reconcile in all 4 languages)
+Icon names are **structure, not copy** — index 0 of `why[]`, `cards[]` and every `groups[][]`
+entry must be byte-identical in every language, and every array must keep the same length as
+`en.js`. The site loads these files directly, so a mismatch is a runtime bug.
+
+## Copy changes vs. the original site (reconciled across every language)
 
 1. **All "Premium" wording removed.** No free/premium tiers, chips, badges or the premium
    notice card. Every feature is presented as free — features section shows a single pill

@@ -1,5 +1,5 @@
-// Arise — vanilla site logic (no framework). Uses translations.js for 4-language copy.
-import { translations, LANGS, detectLang, PERMISSION_CODES } from './translations.js';
+// Arise — vanilla site logic (no framework). Copy lives in src/i18n/, one module per language.
+import { translations, LANGS, detectLang, storeLang, PERMISSION_CODES } from './i18n/index.js';
 
 const CONFIG = {
   play: 'https://play.google.com/store/apps/details?id=com.arise.alarm',
@@ -38,6 +38,7 @@ const ICONS = {
   shield: [['path', { d: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' }]],
   timer: [['circle', { cx: 12, cy: 13, r: 8 }], ['path', { d: 'M12 9v4' }], ['path', { d: 'M9 2h6' }], ['path', { d: 'M17 5l2-2' }]],
   stopwatch: [['circle', { cx: 12, cy: 13, r: 8 }], ['path', { d: 'M12 9v4l2 2' }], ['path', { d: 'M9 2h6' }]],
+  clock: [['circle', { cx: 12, cy: 12, r: 9 }], ['path', { d: 'M12 7v5l3.5 2' }]],
   palette: [['circle', { cx: 13.5, cy: 6.5, r: .6 }], ['circle', { cx: 17.5, cy: 10.5, r: .6 }], ['circle', { cx: 8.5, cy: 7.5, r: .6 }], ['circle', { cx: 6.5, cy: 12.5, r: .6 }], ['path', { d: 'M12 2C6.5 2 2 5.8 2 10.5S6 19 11 19h1.5a2.5 2.5 0 0 0 0-5H11a2 2 0 0 1 0-4h1c5 0 10-1.6 10-4.5C22 3.6 17.5 2 12 2z' }]],
   settings: [['circle', { cx: 12, cy: 12, r: 3 }], ['path', { d: 'M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H8a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.2a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V8a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.2a1.7 1.7 0 0 0-1.4 1z' }]],
   calendar: [['rect', { x: 3, y: 4, width: 18, height: 18, rx: 2 }], ['path', { d: 'M16 2v4' }], ['path', { d: 'M8 2v4' }], ['path', { d: 'M3 10h18' }]],
@@ -69,17 +70,56 @@ function icon(name, size = 22) {
 }
 
 /* ---------- State ---------- */
+// /privacy and /privacy-policy are rewritten to index.html by vercel.json, so the
+// policy has a real, linkable URL (Google Play requires one that resolves directly).
+function routeFromPath() {
+  return /^\/privacy(-policy)?\/?$/.test(window.location.pathname) ? 'privacy' : 'home';
+}
+
 const state = {
   lang: detectLang(),
   theme: (() => { try { return localStorage.getItem('arise-theme') || 'dark'; } catch (e) { return 'dark'; } })(),
-  page: 'home',
+  page: routeFromPath(),
   gallery: 0,
   faqOpen: { 0: true },
+  groupsOpen: { 0: true }, // narrow screens only: which feature groups are expanded
+  activeNav: null,
 };
 let t = translations[state.lang] || translations.en;
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+// On narrow screens the feature list is collapsed into accordions — 22 stacked cards
+// is a very long scroll on a phone.
+const narrow = window.matchMedia('(max-width: 700px)');
+
+/* ---------- Navigation model ---------- */
+// Entries are in document order so the scroll indicator only ever moves forward.
+// `covers` lists every section id that lights up that entry; sections without a nav
+// entry of their own (the hero) intentionally leave the indicator empty.
+// The overview entry reuses `why_eyebrow` ("Overview"), which is already translated
+// for every language, rather than introducing a nav-only key.
+function navModel() {
+  return state.page === 'privacy'
+    ? [
+        { label: t.nav_home, target: 'home', covers: [] },
+        { label: t.nav_policy, target: '#policy', covers: ['policy'] },
+        { label: t.nav_permissions, target: '#permissions', covers: ['permissions'] },
+      ]
+    : [
+        { label: t.why_eyebrow, target: '#overview', covers: ['overview'] },
+        { label: t.nav_gallery, target: '#gallery', covers: ['themes', 'gallery'] },
+        { label: t.nav_features, target: '#features', covers: ['features'] },
+        { label: t.nav_privacy, target: '#privacy', covers: ['privacy'] },
+        { label: t.nav_faq, target: '#faq', covers: ['faq'] },
+      ];
+}
+
+function headerOffset() {
+  const header = $('.site-header');
+  return (header ? header.offsetHeight : 70) + 20;
+}
 
 /* ---------- Renderers ---------- */
 function applyStaticText() {
@@ -91,19 +131,56 @@ function applyStaticText() {
 }
 
 function renderNav() {
-  const links = state.page === 'privacy'
-    ? [[t.nav_home, 'home'], [t.nav_policy, '#policy'], [t.nav_permissions, '#permissions']]
-    : [[t.nav_features, '#features'], [t.nav_gallery, '#gallery'], [t.nav_privacy, '#privacy'], [t.nav_faq, '#faq']];
-  const html = links.map(([label, target]) => `<button class="nav-btn" data-target="${target}">${label}</button>`).join('');
+  const html = navModel().map((n) =>
+    `<button class="nav-btn" data-target="${n.target}">${n.label}</button>`).join('');
   $('#desktop-nav').innerHTML = html;
-  $('#mobile-menu').innerHTML = html.replace(/nav-btn/g, 'nav-btn') +
+  $('#mobile-menu').innerHTML = html +
     `<a href="mailto:${CONFIG.email}">${t.nav_contact}</a>`;
+  updateActiveNav();
+}
+
+/* ---------- Scroll indicator ---------- */
+// Active entry = the last covered section whose top has passed just below the header.
+function currentTarget() {
+  const model = navModel();
+  const line = headerOffset();
+  let active = null;
+  for (const entry of model) {
+    for (const id of entry.covers) {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= line) active = entry.target;
+    }
+  }
+  // The final section is usually too short to ever reach the line, so pin it at the bottom.
+  const doc = document.documentElement;
+  if (window.innerHeight + window.scrollY >= doc.scrollHeight - 2) {
+    const last = model[model.length - 1];
+    if (last && last.covers.length) active = last.target;
+  }
+  return active;
+}
+
+function updateActiveNav() {
+  state.activeNav = currentTarget();
+  $$('.nav-btn').forEach((b) => {
+    const on = b.dataset.target === state.activeNav;
+    b.classList.toggle('is-active', on);
+    if (on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+  });
+}
+
+function updateProgress() {
+  const doc = document.documentElement;
+  const max = doc.scrollHeight - window.innerHeight;
+  const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+  const bar = $('#scroll-progress');
+  if (bar) bar.style.transform = `scaleX(${pct})`;
 }
 
 function renderHeader() {
   $('#lang-btn').innerHTML = `${state.lang.toUpperCase()} ${icon('chevronDown', 16)}`;
   $('#lang-menu').innerHTML = LANGS.map((l) =>
-    `<button data-lang="${l.code}" class="${l.code === state.lang ? 'active' : ''}">${l.label}</button>`).join('');
+    `<button data-lang="${l.code}" class="${l.code === state.lang ? 'active' : ''}" lang="${l.code}"><span class="flag" aria-hidden="true">${l.flag}</span>${l.label}</button>`).join('');
   $$('.seg-btn').forEach((b) => b.classList.toggle('active', b.dataset.themeSet === state.theme));
   $('[data-theme-set="dark"]').innerHTML = icon('moon', 20);
   $('[data-theme-set="light"]').innerHTML = icon('sun', 20);
@@ -128,9 +205,17 @@ function renderLists() {
   $('#themes-row').innerHTML = THEME_SHOTS.map(([src, label]) =>
     `<div class="theme-item"><div class="phone phone--theme"><img src="${src}" alt="${label} theme" /></div><span class="theme-label">${label}</span></div>`).join('');
 
-  $('#feature-groups').innerHTML = (t.groups || []).map((g) =>
-    `<section><h3 class="serif group-title">${g[0]}</h3><div class="feature-cards">${g[1].map((it) =>
-      `<article class="feature-card"><div class="feature-icon">${icon(it[0], 24)}</div><div><h4>${it[1]}</h4><p>${it[2]}</p></div></article>`).join('')}</div></section>`).join('');
+  const compact = narrow.matches;
+  $('#feature-groups').innerHTML = (t.groups || []).map((g, gi) => {
+    const open = !compact || !!state.groupsOpen[gi];
+    const cards = g[1].map((it) =>
+      `<article class="feature-card"><div class="feature-icon">${icon(it[0], 24)}</div><div><h4>${it[1]}</h4><p>${it[2]}</p></div></article>`).join('');
+    const count = `<span class="group-count">${g[1].length}</span>`;
+    const head = compact
+      ? `<button class="group-toggle" data-group="${gi}" aria-expanded="${open}"><h3 class="serif group-title">${g[0]}</h3>${count}<span class="chev">${icon('chevronDown', 20)}</span></button>`
+      : `<h3 class="serif group-title">${g[0]}</h3>`;
+    return `<section class="fgroup${open ? ' open' : ''}">${head}<div class="feature-cards"${open ? '' : ' hidden'}>${cards}</div></section>`;
+  }).join('');
 
   $('#faq-list').innerHTML = (t.faqs || []).map((f, i) =>
     `<article class="faq-item ${state.faqOpen[i] ? 'open' : ''}" data-faq="${i}">
@@ -186,11 +271,25 @@ function renderAll() {
 function scrollToId(id) {
   const el = document.getElementById(id);
   if (!el) return;
-  const y = el.getBoundingClientRect().top + window.pageYOffset - 82;
+  // Land just below the sticky header, whatever height it currently has.
+  const y = el.getBoundingClientRect().top + window.pageYOffset - (headerOffset() - 8);
   window.scrollTo({ top: y, behavior: 'smooth' });
 }
-function goHome() { state.page = 'home'; $('#page-home').hidden = false; $('#page-privacy').hidden = true; window.scrollTo({ top: 0, behavior: 'smooth' }); renderNav(); }
-function goPrivacy() { state.page = 'privacy'; $('#page-home').hidden = true; $('#page-privacy').hidden = false; window.scrollTo({ top: 0, behavior: 'smooth' }); renderNav(); }
+function showPage(page, push) {
+  state.page = page;
+  $('#page-home').hidden = page !== 'home';
+  $('#page-privacy').hidden = page === 'home';
+  const path = page === 'privacy' ? '/privacy' : '/';
+  if (push && window.location.pathname !== path) {
+    try { history.pushState({ page }, '', path + window.location.search); } catch (e) {}
+  }
+  if (push) window.scrollTo({ top: 0, behavior: 'smooth' });
+  renderNav();
+  onScroll();
+}
+function goHome() { showPage('home', true); }
+function goPrivacy() { showPage('privacy', true); }
+window.addEventListener('popstate', () => showPage(routeFromPath(), false));
 function navTarget(target) {
   closeMenus();
   if (target === 'home') return goHome();
@@ -204,7 +303,7 @@ function closeMenus() { $('#lang-menu').hidden = true; $('#lang-btn').setAttribu
 
 /* ---------- Events (delegated) ---------- */
 document.addEventListener('click', (e) => {
-  const el = e.target.closest('[data-nav],[data-target],[data-scroll],[data-theme-set],[data-lang],[data-dot],[data-faq] .faq-btn');
+  const el = e.target.closest('[data-nav],[data-target],[data-scroll],[data-theme-set],[data-lang],[data-dot],[data-group],[data-faq] .faq-btn');
   if (!el) {
     if (!e.target.closest('.lang')) { $('#lang-menu').hidden = true; $('#lang-btn').setAttribute('aria-expanded', 'false'); }
     return;
@@ -213,9 +312,19 @@ document.addEventListener('click', (e) => {
   else if (el.dataset.target) navTarget(el.dataset.target);
   else if (el.dataset.scroll) navTarget('#' + el.dataset.scroll);
   else if (el.dataset.themeSet) { state.theme = el.dataset.themeSet; try { localStorage.setItem('arise-theme', state.theme); } catch (x) {} renderAll(); }
-  else if (el.dataset.lang) { state.lang = el.dataset.lang; try { localStorage.setItem('arise-lang', state.lang); } catch (x) {} closeMenus(); renderAll(); }
+  else if (el.dataset.lang) { state.lang = el.dataset.lang; storeLang(state.lang); closeMenus(); renderAll(); }
   else if (el.dataset.dot) { state.gallery = +el.dataset.dot; renderGallery(); }
-  else if (el.classList.contains('faq-btn')) { const i = +el.closest('[data-faq]').dataset.faq; state.faqOpen[i] = !state.faqOpen[i]; renderLists(); }
+  else if (el.dataset.group !== undefined) {
+    const i = +el.dataset.group;
+    state.groupsOpen[i] = !state.groupsOpen[i];
+    renderLists();
+    onScroll();
+  } else if (el.classList.contains('faq-btn')) {
+    const i = +el.closest('[data-faq]').dataset.faq;
+    state.faqOpen[i] = !state.faqOpen[i];
+    renderLists();
+    onScroll();
+  }
 });
 
 $('#lang-btn').addEventListener('click', (e) => { e.stopPropagation(); const m = $('#lang-menu'); m.hidden = !m.hidden; $('#lang-btn').setAttribute('aria-expanded', String(!m.hidden)); });
@@ -224,6 +333,28 @@ $('#gal-prev').addEventListener('click', () => { const n = (t.shots || []).lengt
 $('#gal-next').addEventListener('click', () => { const n = (t.shots || []).length; state.gallery = (state.gallery + 1) % n; renderGallery(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenus(); });
 $('#back-to-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-window.addEventListener('scroll', () => { $('#back-to-top').classList.toggle('visible', window.scrollY > 480); }, { passive: true });
+
+/* ---------- Scroll loop (progress bar + section indicator + back-to-top) ---------- */
+let ticking = false;
+function onScroll() {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    ticking = false;
+    updateProgress();
+    updateActiveNav();
+    $('#back-to-top').classList.toggle('visible', window.scrollY > 480);
+  });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll);
+
+// Swapping between the accordion and the full list changes the markup, so re-render.
+const onBreakpoint = () => { renderLists(); onScroll(); };
+if (narrow.addEventListener) narrow.addEventListener('change', onBreakpoint);
+else narrow.addListener(onBreakpoint); // Safari < 14
 
 renderAll();
+$('#page-home').hidden = state.page !== 'home';
+$('#page-privacy').hidden = state.page === 'home';
+onScroll();
