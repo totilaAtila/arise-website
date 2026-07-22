@@ -57,6 +57,7 @@ const ICONS = {
   chevronLeft: [['path', { d: 'm15 18-6-6 6-6' }]],
   chevronRight: [['path', { d: 'm9 18 6-6-6-6' }]],
   chevronDown: [['path', { d: 'm6 9 6 6 6-6' }]],
+  chevronUp: [['path', { d: 'm18 15-6-6-6 6' }]],
   sun: [['circle', { cx: 12, cy: 12, r: 4 }], ['path', { d: 'M12 2v2' }], ['path', { d: 'M12 20v2' }], ['path', { d: 'm4.9 4.9 1.4 1.4' }], ['path', { d: 'm17.7 17.7 1.4 1.4' }], ['path', { d: 'M2 12h2' }], ['path', { d: 'M20 12h2' }], ['path', { d: 'm6.3 17.7-1.4 1.4' }], ['path', { d: 'm19.1 4.9-1.4 1.4' }]],
 };
 function icon(name, size = 22) {
@@ -222,5 +223,7 @@ $('#menu-btn').addEventListener('click', (e) => { e.stopPropagation(); const m =
 $('#gal-prev').addEventListener('click', () => { const n = (t.shots || []).length; state.gallery = (state.gallery - 1 + n) % n; renderGallery(); });
 $('#gal-next').addEventListener('click', () => { const n = (t.shots || []).length; state.gallery = (state.gallery + 1) % n; renderGallery(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenus(); });
+$('#back-to-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+window.addEventListener('scroll', () => { $('#back-to-top').classList.toggle('visible', window.scrollY > 480); }, { passive: true });
 
 renderAll();
