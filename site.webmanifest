@@ -1,11 +1,11 @@
 {
   "name": "Arise Alarm Clock",
   "short_name": "Arise",
-  "description": "Modern offline alarm clock for Android.",
+  "description": "Offline alarm clock for Android.",  
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#fff7f5",
-  "theme_color": "#d32635",
+  "background_color": "#100b09",
+  "theme_color": "#ff9d3c",
   "icons": [
     {
       "src": "/assets/brand/icon_512.png",
