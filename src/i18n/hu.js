@@ -53,7 +53,7 @@ export default {
       ['volume', 'Fokozatos hangerő', 'A hang halkan indul, majd teljesre erősödik.'],
       ['sunrise', 'Napfelkelte-hatás', 'A téma világosodik, ahogy az ébresztő szól.'],
       ['hand', 'Szundi', 'Gyors szundi, ha még kell pár perc.'],
-      ['shield', 'Húzd le a leállításhoz', 'A tudatos húzás állítja le az ébresztőt, hogy ne kapcsold ki véletlenül.'],
+      ['shield', 'Húzd felfelé a leállításhoz', 'A tudatos húzás állítja le az ébresztőt, hogy ne kapcsold ki véletlenül.'],
     ]],
     ['Óra és időmérés', [
       ['clock', 'Világóra', 'Nézd meg az időt több városban egy pillantással.'],

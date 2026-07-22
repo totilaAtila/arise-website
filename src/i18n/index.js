@@ -77,8 +77,10 @@ export function detectLang() {
     }
   } catch (e) {}
 
-  const saved = readStored();
-  if (saved && SUPPORTED.has(saved)) return saved;
+  // Normalised like every other source, so a hand-edited or legacy value such as
+  // "de-AT" or "mo" still resolves instead of being silently discarded.
+  const saved = normalise(readStored());
+  if (saved) return saved;
 
   const tags = navigator.languages && navigator.languages.length
     ? navigator.languages

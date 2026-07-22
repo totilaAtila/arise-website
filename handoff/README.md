@@ -1,7 +1,7 @@
 # Arise — website redesign (developer handoff)
 
 Static **HTML + CSS + vanilla JS**. No React, no Vite, no build step. Drop the files
-into your repo and serve as-is. The 4-language translation system is kept.
+into your repo and serve as-is. The translation system is kept, now covering nine languages.
 
 ## Files
 
@@ -40,8 +40,11 @@ Nine languages ship: `en, de, fr, lv, lt, hu, pl, ro, ru`. Adding a tenth means 
   bar sits on the bottom edge of the header. Nav entries are in document order; sections without
   their own entry fold into the neighbouring one (`#themes` → Gallery).
 - **Feature list** — below 700px each feature group collapses into an accordion.
-- Home ↔ Privacy handled by JS (show/hide `<main>`), not URL routes. If you need real
-  `/privacy` routing, wire `goPrivacy()` / `goHome()` to `history.pushState`.
+- **Home ↔ Privacy are real URLs.** `/privacy` and `/privacy-policy` are rewritten to
+  `index.html` by `vercel.json` and resolved by `routeFromPath()` on load, so the policy URL
+  published on Google Play opens the policy directly. Navigating between the two uses
+  `history.pushState`, browser back/forward is handled via `popstate`, and any `?lang=`
+  query is preserved across the transition.
 
 ## Translation structure
 
@@ -76,5 +79,9 @@ entry must be byte-identical in every language, and every array must keep the sa
 6. **Removed** "Default alarm app" (OEMs often block it).
 7. New **Themes** section (Sunrise / Aurora / Ocean / Black phone shots).
 
-The full, final strings for all 4 languages are in `src/translations.js` — use it as the
-source of truth when merging into your existing keys.
+The full, final strings live in `src/i18n/<code>.js`, one module per language — use `en.js`
+as the source of truth for structure when merging into your existing keys.
+
+Note on the "32 languages" copy: that number describes the **Android app's** in-app language
+selector, not this website. The site itself ships nine languages (`LANGS` in
+`src/i18n/index.js`). Keep the two counts distinct when editing copy.
