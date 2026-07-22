@@ -17,7 +17,7 @@ export default {
     ['sunrise', 'Pakāpeniska modināšana', 'Skaļums lēni pieaug un motīvs kļūst gaišāks, tāpēc modinātājs pamodina maigi, nevis izrauj no miega.'],
     ['music', 'Skaņas pēc tavas izvēles', 'Izvēlies kādu no iebūvētajiem signāliem vai jebkuru audio failu ierīcē, katram modinātājam savu.'],
     ['palette', 'Motīvi, kas tev der', 'Gatavi gradienti vai paša veidots motīvs trīs krāsu zonās.'],
-    ['globe', 'Tava valoda', '32 valodas, no angļu līdz japāņu valodai — maini jebkurā brīdī.'],
+    ['globe', 'Tava valoda', '19 valodas, no angļu līdz japāņu valodai — maini jebkurā brīdī.'],
   ],
 
   gallery_eyebrow: 'Galerija', gallery_title: 'Ieskats lietotnē.', gallery_sub: 'Modinātāji, motīvi un rīki tādi, kādi tie izskatās tavā tālrunī.',
@@ -97,7 +97,7 @@ export default {
     ['Vai varu izmantot savu skaņu?', 'Jā. Par modinātāja signālu vari izvēlēties jebkuru audio failu savā ierīcē.'],
     ['Vai modinātāji pārdzīvo pārstartēšanu?', 'Jā. Modinātāji tiek automātiski atjaunoti pēc ierīces pārstartēšanas.'],
     ['Kādi dati tiek vākti?', 'Nekādi. Nav ne izsekošanas, ne analītikas, ne reklāmu.'],
-    ['Kādas valodas tiek atbalstītas?', '32 valodas, tostarp English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी un 日本語.'],
+    ['Kādas valodas tiek atbalstītas?', '19 valodas, tostarp English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी un 日本語.'],
   ],
 
   footer_tagline: 'Bezsaistes modinātājs Android ierīcēm.',

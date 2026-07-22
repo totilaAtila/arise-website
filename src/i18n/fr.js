@@ -17,7 +17,7 @@ export default {
     ['sunrise', 'Réveil progressif', 'Le volume monte et le thème s\'éclaircit peu à peu : l\'alarme vous réveille en douceur au lieu de vous brusquer.'],
     ['music', 'Les sons de votre choix', 'Choisissez une sonnerie intégrée ou n\'importe quel fichier audio de votre appareil, avec un son différent par alarme.'],
     ['palette', 'Des thèmes à votre image', 'Des dégradés prédéfinis ou un thème que vous composez vous-même, sur trois zones de couleur.'],
-    ['globe', 'Votre langue', '32 langues, de l\'anglais au japonais — changez quand vous voulez.'],
+    ['globe', 'Votre langue', '19 langues, de l\'anglais au japonais — changez quand vous voulez.'],
   ],
 
   gallery_eyebrow: 'Galerie', gallery_title: 'Vu de l\'intérieur.', gallery_sub: 'Les alarmes, thèmes et outils tels qu\'ils apparaissent sur votre téléphone.',
@@ -97,7 +97,7 @@ export default {
     ['Puis-je utiliser mon propre son ?', 'Oui. Choisissez n\'importe quel fichier audio de votre appareil comme sonnerie.'],
     ['Les alarmes résistent-elles à un redémarrage ?', 'Oui. Les alarmes sont reprogrammées automatiquement après le redémarrage de l\'appareil.'],
     ['Quelles données sont collectées ?', 'Aucune. Il n\'y a ni suivi, ni analyse d\'audience, ni publicité.'],
-    ['Quelles langues sont prises en charge ?', '32 langues, dont English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी et 日本語.'],
+    ['Quelles langues sont prises en charge ?', '19 langues, dont English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी et 日本語.'],
   ],
 
   footer_tagline: 'Un réveil hors ligne pour Android.',

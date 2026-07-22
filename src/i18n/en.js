@@ -17,7 +17,7 @@ export default {
     ['sunrise', 'Gradual wake-up', 'Volume and the theme rise slowly, so the alarm eases you awake instead of jolting you.'],
     ['music', 'Sounds you choose', 'Pick from built-in tones or any audio file on your device, and set a different one per alarm.'],
     ['palette', 'Themes that fit you', 'Preset gradients or a theme you build yourself, across three colour zones.'],
-    ['globe', 'Your language', '32 languages, from English to Japanese — switch any time.'],
+    ['globe', 'Your language', '19 languages, from English to Japanese — switch any time.'],
   ],
 
   gallery_eyebrow: 'Gallery', gallery_title: 'A look inside.', gallery_sub: 'The alarms, themes and tools as they appear on your phone.',
@@ -97,7 +97,7 @@ export default {
     ['Can I use my own sound?', 'Yes. You can pick any audio file on your device as an alarm tone.'],
     ['Do alarms survive a restart?', 'Yes. Alarms are rescheduled automatically after the device reboots.'],
     ['What data is collected?', 'None. There is no tracking, analytics or advertising.'],
-    ['Which languages are supported?', '32 languages, including English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी and 日本語.'],
+    ['Which languages are supported?', '19 languages, including English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी and 日本語.'],
   ],
 
   footer_tagline: 'An offline alarm clock for Android.',

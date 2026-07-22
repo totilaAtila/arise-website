@@ -17,7 +17,7 @@ export default {
     ['sunrise', 'Stopniowe budzenie', 'Głośność i motyw narastają powoli, więc alarm łagodnie Cię budzi, zamiast zrywać.'],
     ['music', 'Dźwięki, które wybierasz', 'Wybierz spośród wbudowanych dźwięków lub dowolnego pliku audio, osobno dla każdego alarmu.'],
     ['palette', 'Motywy dopasowane do Ciebie', 'Gotowe gradienty albo motyw stworzony przez Ciebie, w trzech strefach kolorów.'],
-    ['globe', 'Twój język', '32 języki, od angielskiego po japoński — zmień w każdej chwili.'],
+    ['globe', 'Twój język', '19 języków, od angielskiego po japoński — zmień w każdej chwili.'],
   ],
 
   gallery_eyebrow: 'Galeria', gallery_title: 'Spójrz do środka.', gallery_sub: 'Alarmy, motywy i narzędzia tak, jak wyglądają na telefonie.',
@@ -97,7 +97,7 @@ export default {
     ['Czy mogę użyć własnego dźwięku?', 'Tak. Możesz wybrać dowolny plik audio jako dźwięk alarmu.'],
     ['Czy alarmy przetrwają restart?', 'Tak. Alarmy są automatycznie przywracane po ponownym uruchomieniu.'],
     ['Jakie dane są zbierane?', 'Żadne. Nie ma śledzenia, analityki ani reklam.'],
-    ['Jakie języki są obsługiwane?', '32 języki, w tym English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी i 日本語.'],
+    ['Jakie języki są obsługiwane?', '19 języków, w tym English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी i 日本語.'],
   ],
 
   footer_tagline: 'Budzik offline dla Androida.',

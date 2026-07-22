@@ -17,7 +17,7 @@ export default {
     ['sunrise', 'Fokozatos ébresztés', 'A hangerő és a téma lassan erősödik, így az ébresztő gyengéden ébreszt, nem riaszt fel.'],
     ['music', 'Az általad választott hangok', 'Válassz a beépített hangok közül vagy bármely hangfájlból, ébresztőnként külön.'],
     ['palette', 'Hozzád illő témák', 'Előre beállított színátmenetek vagy saját téma, három színzónában.'],
-    ['globe', 'A te nyelved', '32 nyelv, az angoltól a japánig — bármikor válts.'],
+    ['globe', 'A te nyelved', '19 nyelv, az angoltól a japánig — bármikor válts.'],
   ],
 
   gallery_eyebrow: 'Galéria', gallery_title: 'Pillants be.', gallery_sub: 'Az ébresztők, témák és eszközök úgy, ahogy a telefonon megjelennek.',
@@ -97,7 +97,7 @@ export default {
     ['Használhatom a saját hangomat?', 'Igen. Bármely hangfájlt kiválaszthatsz ébresztőhangnak.'],
     ['Túlélik az ébresztők az újraindítást?', 'Igen. Az ébresztők újraindítás után automatikusan visszaállnak.'],
     ['Milyen adatokat gyűjt?', 'Semmilyet. Nincs követés, analitika vagy hirdetés.'],
-    ['Milyen nyelveket támogat?', '32 nyelv, köztük English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी és 日本語.'],
+    ['Milyen nyelveket támogat?', '19 nyelv, köztük English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी és 日本語.'],
   ],
 
   footer_tagline: 'Offline ébresztőóra Androidra.',

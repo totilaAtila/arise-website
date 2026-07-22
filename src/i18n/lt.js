@@ -17,7 +17,7 @@ export default {
     ['sunrise', 'Laipsniškas žadinimas', 'Garsumas pamažu stiprėja, o tema šviesėja, todėl žadintuvas pažadina švelniai, o ne išplėšia iš miego.'],
     ['music', 'Tavo pasirinkti garsai', 'Rinkis iš integruotų melodijų arba bet kurio įrenginyje esančio garso failo ir kiekvienam žadintuvui priskirk kitą.'],
     ['palette', 'Tau tinkančios temos', 'Paruošti gradientai arba tavo susikurta tema iš trijų spalvų zonų.'],
-    ['globe', 'Tavo kalba', '32 kalbos, nuo anglų iki japonų — pakeisti gali bet kada.'],
+    ['globe', 'Tavo kalba', '19 kalbų, nuo anglų iki japonų — pakeisti gali bet kada.'],
   ],
 
   gallery_eyebrow: 'Galerija', gallery_title: 'Žvilgsnis į vidų.', gallery_sub: 'Žadintuvai, temos ir įrankiai — tokie, kokius matai savo telefone.',
@@ -97,7 +97,7 @@ export default {
     ['Ar galiu naudoti savo garsą?', 'Taip. Melodija gali būti bet kuris tavo įrenginio garso failas.'],
     ['Ar žadintuvai išlieka paleidus iš naujo?', 'Taip. Žadintuvai automatiškai atkuriami paleidus įrenginį iš naujo.'],
     ['Kokie duomenys renkami?', 'Jokie. Nėra jokio sekimo, analitikos ar reklamų.'],
-    ['Kokios kalbos palaikomos?', '32 kalbos, tarp jų English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी ir 日本語.'],
+    ['Kokios kalbos palaikomos?', '19 kalbų, tarp jų English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी ir 日本語.'],
   ],
 
   footer_tagline: 'Android žadintuvas, veikiantis be interneto.',

@@ -17,7 +17,7 @@ export default {
     ['sunrise', 'Sanftes Aufwachen', 'Der Ton wird langsam lauter, das Design heller — so weckt dich der Alarm, statt dich aufzuschrecken.'],
     ['music', 'Klänge deiner Wahl', 'Wähle einen mitgelieferten Ton oder eine beliebige Audiodatei auf deinem Gerät — für jeden Alarm einen anderen.'],
     ['palette', 'Designs, die passen', 'Fertige Farbverläufe oder ein Design, das du selbst gestaltest — über drei Farbzonen.'],
-    ['globe', 'Deine Sprache', '32 Sprachen, von Englisch bis Japanisch — jederzeit umschaltbar.'],
+    ['globe', 'Deine Sprache', '19 Sprachen, von Englisch bis Japanisch — jederzeit umschaltbar.'],
   ],
 
   gallery_eyebrow: 'Galerie', gallery_title: 'Ein Blick hinein.', gallery_sub: 'Alarme, Designs und Funktionen, so wie sie auf deinem Handy aussehen.',
@@ -97,7 +97,7 @@ export default {
     ['Kann ich eigene Töne nutzen?', 'Ja. Du kannst jede beliebige Audiodatei auf deinem Gerät als Alarmton wählen.'],
     ['Überstehen Alarme einen Neustart?', 'Ja. Alarme werden nach dem Neustart des Geräts automatisch neu geplant.'],
     ['Welche Daten werden erfasst?', 'Keine. Kein Tracking, keine Analysedienste, keine Werbung.'],
-    ['Welche Sprachen werden unterstützt?', '32 Sprachen, darunter English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी und 日本語.'],
+    ['Welche Sprachen werden unterstützt?', '19 Sprachen, darunter English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी und 日本語.'],
   ],
 
   footer_tagline: 'Ein Offline-Wecker für Android.',

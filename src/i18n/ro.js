@@ -17,7 +17,7 @@ export default {
     ['sunrise', 'Trezire treptată', 'Volumul și tema cresc lent, așa că alarma te trezește ușor, fără să te sperie.'],
     ['music', 'Sunetele alese de tine', 'Alege dintre tonurile incluse sau orice fișier audio de pe dispozitiv, câte unul pentru fiecare alarmă.'],
     ['palette', 'Teme pe gustul tău', 'Gradienți presetați sau o temă creată de tine, pe trei zone de culoare.'],
-    ['globe', 'Limba ta', '32 de limbi, de la engleză la japoneză — schimbă oricând.'],
+    ['globe', 'Limba ta', '19 limbi, de la engleză la japoneză — schimbă oricând.'],
   ],
 
   gallery_eyebrow: 'Galerie', gallery_title: 'O privire înăuntru.', gallery_sub: 'Alarmele, temele și instrumentele așa cum apar pe telefon.',
@@ -97,7 +97,7 @@ export default {
     ['Pot folosi propriul sunet?', 'Da. Poți alege orice fișier audio de pe dispozitiv ca ton de alarmă.'],
     ['Alarmele rezistă la o repornire?', 'Da. Alarmele sunt reprogramate automat după repornirea dispozitivului.'],
     ['Ce date sunt colectate?', 'Niciunele. Nu există urmărire, analytics sau reclame.'],
-    ['Ce limbi sunt acceptate?', '32 de limbi, printre care English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी și 日本語.'],
+    ['Ce limbi sunt acceptate?', '19 limbi, printre care English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी și 日本語.'],
   ],
 
   footer_tagline: 'Un ceas cu alarmă offline pentru Android.',
