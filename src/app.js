@@ -4,6 +4,7 @@ import { translations, LANGS, detectLang, storeLang, PERMISSION_CODES } from './
 const CONFIG = {
   play: 'https://play.google.com/store/apps/details?id=com.arise.alarm',
   test: 'https://play.google.com/apps/testing/com.arise.alarm',
+  group: 'https://groups.google.com/g/arise-alarm-clock',
   email: 'ariseapplicationsupport@gmail.com',
   version: '1.0',
   updated: '2026',
@@ -241,6 +242,7 @@ function renderGallery() {
 }
 
 function renderStaticRefs() {
+  $('#cta-group').href = CONFIG.group;
   $('#cta-play').href = CONFIG.play;
   $('#cta-test').href = CONFIG.test;
   $('#pp-version').textContent = CONFIG.version;
