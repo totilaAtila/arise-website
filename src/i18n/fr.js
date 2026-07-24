@@ -8,7 +8,8 @@ export default {
   hero_pill: 'Réveil hors ligne pour Android',
   hero_title_a: 'Réveil en douceur.', hero_title_b: 'Gardez le contrôle.',
   hero_sub: 'Un réveil pour Android qui vous tire du sommeil en douceur, avec des thèmes personnalisés, un minuteur et un chronomètre. Sans compte, sans suivi — tout reste sur votre appareil.',
-  cta_play: 'Télécharger sur Google Play', cta_test: 'Rejoindre le programme de test',
+  cta_group: '1. Rejoignez le groupe Google', cta_test: '2. Inscrivez-vous au test', cta_play: '3. Installez depuis Google Play',
+  cta_steps_note: 'Suivez ces 3 étapes dans l\'ordre pour devenir testeur.',
   hero_note: 'Gratuit pour tous. Fonctionne entièrement hors ligne.',
   qp_alarms: 'Alarmes multiples', qp_themes: 'Thèmes personnalisés', qp_volume: 'Volume progressif', qp_privacy: 'Aucun suivi',
 
@@ -18,7 +19,7 @@ export default {
     ['music', 'Les sons de votre choix', 'Choisissez une sonnerie intégrée ou n\'importe quel fichier audio de votre appareil, avec un son différent par alarme.'],
     ['palette', 'Des thèmes à votre image', 'Des dégradés prédéfinis ou un thème que vous composez vous-même, sur trois zones de couleur.'],
     ['globe', 'Votre langue', '19 langues, de l\'anglais au japonais — changez quand vous voulez.'],
-  ],
+    ],
 
   gallery_eyebrow: 'Galerie', gallery_title: 'Vu de l\'intérieur.', gallery_sub: 'Les alarmes, thèmes et outils tels qu\'ils apparaissent sur votre téléphone.',
   themes_eyebrow: 'Thèmes', themes_title: 'Une application, toutes vos humeurs.', themes_sub: 'Des préréglages comme Classic, Aurora, Sunrise, Ocean, Green et Black — ou composez votre propre thème.',
@@ -39,28 +40,28 @@ export default {
     ['Réglages', 'Affichage, son et fiabilité, au même endroit.'],
     ['Écran de réveil', 'Répétez, ou glissez vers le haut pour arrêter.'],
     ['Son de l\'alarme', 'Sonnerie, volume progressif et durée de répétition.'],
-  ],
+    ],
 
   features_eyebrow: 'Fonctionnalités', features_title: 'Tout, au même endroit.', features_sub: 'Toutes les fonctionnalités sont gratuites.',
   groups: [
     ['Réveils intelligents', [
       ['bell', 'Alarmes multiples', 'Créez et gérez autant d\'alarmes que nécessaire.'],
       ['music', 'Sonneries intégrées', 'Un ensemble de sons d\'alarme prêts à l\'emploi.'],
-      ['fileMusic', 'Fichier audio personnel', 'Utilisez tout fichier audio de votre appareil comme sonnerie.'],
+     ['fileMusic', 'Fichier audio personnel', 'Utilisez tout fichier audio de votre appareil comme sonnerie.'],
       ['sparkles', 'Une sonnerie par alarme', 'Attribuez un son différent à chaque alarme.'],
-    ]],
+      ]],
     ['Matins en douceur', [
       ['volume', 'Volume progressif', 'Le volume monte doucement jusqu\'au maximum.'],
       ['sunrise', 'Lever de soleil', 'Le thème s\'éclaircit pendant que l\'alarme sonne.'],
       ['hand', 'Répéter', 'Répétez l\'alarme quand il vous faut quelques minutes de plus.'],
       ['shield', 'Glisser pour arrêter', 'Un geste délibéré arrête l\'alarme, pour éviter toute désactivation accidentelle.'],
-    ]],
+      ]],
     ['Horloge et chronométrage', [
       ['clock', 'Horloge mondiale', 'L\'heure des grandes villes en un coup d\'œil.'],
       ['timer', 'Minuteur', 'Un compte à rebours simple et direct.'],
       ['stopwatch', 'Chronomètre', 'Chronométrez avec les temps au tour.'],
       ['hand', 'Navigation par balayage', 'Passez de l\'horloge au minuteur et au chronomètre d\'un balayage.'],
-    ]],
+      ]],
     ['À votre image', [
       ['palette', 'Thèmes prédéfinis', 'Plusieurs dégradés prédéfinis au choix.'],
       ['sparkles', 'Éditeur de thèmes', 'Composez vos propres thèmes : lumière, couleur, taille et effet verre, en direct.'],
@@ -68,14 +69,14 @@ export default {
       ['settings', 'Réglage fin', 'Ajustez chaque couleur jusqu\'au résultat voulu.'],
       ['calendar', 'Format de l\'heure', '12 ou 24 heures, à votre convenance.'],
       ['globe', 'Vos villes', 'Ajoutez des villes à l\'horloge mondiale et voyez-les côte à côte.'],
-    ]],
+      ]],
     ['Fiable par conception', [
       ['moon', 'Compatible avec le mode Ne pas déranger', 'Les alarmes sonnent même en mode Ne pas déranger.'],
       ['phone', 'Alarme sur l\'écran de verrouillage', 'L\'écran de sonnerie s\'affiche par-dessus l\'écran de verrouillage.'],
       ['rotate', 'Reprogrammation après redémarrage', 'Les alarmes reviennent automatiquement après un redémarrage.'],
       ['shield', 'Suppression protégée', 'Une étape de confirmation avant qu\'une alarme ne soit supprimée.'],
-    ]],
-  ],
+      ]],
+    ],
 
   privacy_eyebrow: 'Confidentialité', privacy_title: 'Privé par défaut.', privacy_sub: 'Rien ne quitte votre téléphone.',
   privacy_btn: 'Lire la politique de confidentialité',
@@ -86,7 +87,7 @@ export default {
     ['lock', 'Autorisations minimales', 'Uniquement les autorisations dont un réveil a réellement besoin.'],
     ['shield', 'En toute transparence', 'Chaque autorisation et son usage sont détaillés intégralement.'],
     ['fileText', 'Aucun compte', 'Pas d\'inscription, pas d\'e-mail, pas de profil.'],
-  ],
+    ],
 
   faq_eyebrow: 'FAQ', faq_title: 'Questions et réponses.', faq_sub: 'Ce que l\'on demande le plus souvent.',
   faqs: [
@@ -98,7 +99,7 @@ export default {
     ['Les alarmes résistent-elles à un redémarrage ?', 'Oui. Les alarmes sont reprogrammées automatiquement après le redémarrage de l\'appareil.'],
     ['Quelles données sont collectées ?', 'Aucune. Il n\'y a ni suivi, ni analyse d\'audience, ni publicité.'],
     ['Quelles langues sont prises en charge ?', '19 langues, dont English, Română, Polski, Magyar, Deutsch, Русский, Português, Ελληνικά, हिन्दी et 日本語.'],
-  ],
+    ],
 
   footer_tagline: 'Un réveil hors ligne pour Android.',
   footer_links: 'Explorer', footer_contact: 'Contact', footer_email: 'Assistance',
@@ -124,5 +125,5 @@ export default {
     'Faire vibrer l\'appareil quand l\'alarme sonne.',
     'Empêcher le système de retarder les alarmes.',
     'Choisir un fichier audio comme sonnerie d\'alarme.',
-  ],
+    ],
 };
