@@ -1,194 +1,196 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#100b09" />
-    <meta name="description" content="Arise is an offline Android alarm clock with gradual wake-ups, custom themes, a timer, a stopwatch and a world clock. Private, no tracking, no account." />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="Arise — Alarm Clock for Android" />
-    <meta property="og:description" content="A private, offline Android alarm clock. Gradual wake-ups, custom themes, timer, stopwatch, world clock." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/assets/brand/icon_512.png" />
-    <link rel="icon" type="image/png" href="/assets/brand/icon_512.png" />
-    <link rel="apple-touch-icon" href="/assets/brand/icon_512.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./src/styles.css" />
-    <title>Arise — Alarm Clock for Android</title>
-  </head>
-  <body>
-    <!-- ============ HEADER ============ -->
-    <header class="site-header">
-      <button class="brand" data-nav="home" aria-label="Arise home">
-        <img src="assets/brand/icon_512.png" alt="Arise" />
-        <span>Arise</span>
-      </button>
-      <nav class="desktop-nav" id="desktop-nav" aria-label="Main"></nav>
-      <div class="actions">
-        <div class="theme-seg" role="group" aria-label="Theme">
-          <button class="seg-btn" data-theme-set="dark" aria-label="Nightfall theme"></button>
-          <button class="seg-btn" data-theme-set="light" aria-label="Aurora theme"></button>
-        </div>
-        <div class="lang">
-          <button class="lang-btn" id="lang-btn" aria-haspopup="true" aria-expanded="false"></button>
-          <div class="lang-menu" id="lang-menu" hidden></div>
-        </div>
-        <button class="icon-btn menu-btn" id="menu-btn" aria-label="Menu" aria-expanded="false"></button>
-      </div>
-      <div class="mobile-menu" id="mobile-menu" hidden></div>
-      <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress"></span></div>
-    </header>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#100b09" />
+<meta name="description" content="Arise is an offline Android alarm clock with gradual wake-ups, custom themes, a timer, a stopwatch and a world clock. Private, no tracking, no account." />
+<meta name="robots" content="index, follow" />
+<meta property="og:title" content="Arise — Alarm Clock for Android" />
+<meta property="og:description" content="A private, offline Android alarm clock. Gradual wake-ups, custom themes, timer, stopwatch, world clock." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="/assets/brand/icon_512.png" />
+<link rel="icon" type="image/png" href="/assets/brand/icon_512.png" />
+<link rel="apple-touch-icon" href="/assets/brand/icon_512.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./src/styles.css" />
+<title>Arise — Alarm Clock for Android</title>
+</head>
+<body>
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+<button class="brand" data-nav="home" aria-label="Arise home">
+<img src="assets/brand/icon_512.png" alt="Arise" />
+<span>Arise</span>
+</button>
+<nav class="desktop-nav" id="desktop-nav" aria-label="Main"></nav>
+<div class="actions">
+<div class="theme-seg" role="group" aria-label="Theme">
+<button class="seg-btn" data-theme-set="dark" aria-label="Nightfall theme"></button>
+<button class="seg-btn" data-theme-set="light" aria-label="Aurora theme"></button>
+</div>
+<div class="lang">
+<button class="lang-btn" id="lang-btn" aria-haspopup="true" aria-expanded="false"></button>
+<div class="lang-menu" id="lang-menu" hidden></div>
+</div>
+<button class="icon-btn menu-btn" id="menu-btn" aria-label="Menu" aria-expanded="false"></button>
+</div>
+<div class="mobile-menu" id="mobile-menu" hidden></div>
+<div class="scroll-progress" aria-hidden="true"><span id="scroll-progress"></span></div>
+</header>
 
-    <!-- ============ HOME ============ -->
-    <main id="page-home">
-      <section class="hero" id="top">
-        <div class="hero-text">
-          <span class="pill"><span class="i" data-icon="sunrise"></span> <span data-i18n="hero_pill"></span></span>
-          <h1 class="serif"><span data-i18n="hero_title_a"></span><span class="accent" data-i18n="hero_title_b"></span></h1>
-          <p class="hero-sub" data-i18n="hero_sub"></p>
-          <div class="cta-row">
-            <a class="btn btn-primary" id="cta-play" target="_blank" rel="noopener"><span class="i" data-icon="download"></span> <span data-i18n="cta_play"></span></a>
-            <a class="btn btn-secondary" id="cta-test" target="_blank" rel="noopener" data-i18n="cta_test"></a>
-          </div>
-          <p class="note" data-i18n="hero_note"></p>
-          <div class="qp" id="quick-points"></div>
-        </div>
-        <div class="hero-device">
-          <div class="wrap">
-            <div class="glow" aria-hidden="true"></div>
-            <div class="phone phone--hero"><img src="assets/screenshots/HomeScreen.png" alt="Arise home screen" /></div>
-          </div>
-        </div>
-      </section>
+<!-- ============ HOME ============ -->
+<main id="page-home">
+<section class="hero" id="top">
+<div class="hero-text">
+<span class="pill"><span class="i" data-icon="sunrise"></span> <span data-i18n="hero_pill"></span></span>
+<h1 class="serif"><span data-i18n="hero_title_a"></span><span class="accent" data-i18n="hero_title_b"></span></h1>
+<p class="hero-sub" data-i18n="hero_sub"></p>
+<p class="note cta-steps-note" data-i18n="cta_steps_note"></p>
+<div class="cta-row">
+<a class="btn btn-primary" id="cta-group" target="_blank" rel="noopener" data-i18n="cta_group"></a>
+<a class="btn btn-secondary" id="cta-test" target="_blank" rel="noopener" data-i18n="cta_test"></a>
+<a class="btn btn-secondary" id="cta-play" target="_blank" rel="noopener"><span class="i" data-icon="download"></span> <span data-i18n="cta_play"></span></a>
+</div>
+<p class="note" data-i18n="hero_note"></p>
+<div class="qp" id="quick-points"></div>
+</div>
+<div class="hero-device">
+<div class="wrap">
+<div class="glow" aria-hidden="true"></div>
+<div class="phone phone--hero"><img src="assets/screenshots/HomeScreen.png" alt="Arise home screen" /></div>
+</div>
+</div>
+</section>
 
-      <section class="section" id="overview">
-        <div class="heading">
-          <p class="eyebrow" data-i18n="why_eyebrow"></p>
-          <h2 class="serif h2" data-i18n="why_title"></h2>
-          <p class="lead" data-i18n="why_sub"></p>
-        </div>
-        <div class="grid3" id="why-grid"></div>
-      </section>
+<section class="section" id="overview">
+<div class="heading">
+<p class="eyebrow" data-i18n="why_eyebrow"></p>
+<h2 class="serif h2" data-i18n="why_title"></h2>
+<p class="lead" data-i18n="why_sub"></p>
+</div>
+<div class="grid3" id="why-grid"></div>
+</section>
 
-      <section class="section section--tight" id="themes">
-        <div class="heading">
-          <p class="eyebrow" data-i18n="themes_eyebrow"></p>
-          <h2 class="serif h2" data-i18n="themes_title"></h2>
-          <p class="lead" data-i18n="themes_sub"></p>
-        </div>
-        <div class="themes-row" id="themes-row"></div>
-      </section>
+<section class="section section--tight" id="themes">
+<div class="heading">
+<p class="eyebrow" data-i18n="themes_eyebrow"></p>
+<h2 class="serif h2" data-i18n="themes_title"></h2>
+<p class="lead" data-i18n="themes_sub"></p>
+</div>
+<div class="themes-row" id="themes-row"></div>
+</section>
 
-      <section class="section" id="gallery">
-        <div class="heading">
-          <p class="eyebrow" data-i18n="gallery_eyebrow"></p>
-          <h2 class="serif h2" data-i18n="gallery_title"></h2>
-          <p class="lead" data-i18n="gallery_sub"></p>
-        </div>
-        <div class="gallery-wrap">
-          <button class="gal-btn left" id="gal-prev" aria-label="Previous"></button>
-          <div class="phone phone--gallery"><img id="gal-img" src="" alt="" /></div>
-          <button class="gal-btn right" id="gal-next" aria-label="Next"></button>
-          <div class="gal-caption"><h3 class="serif" id="gal-title"></h3><p id="gal-desc"></p></div>
-          <div class="dots" id="gal-dots"></div>
-        </div>
-      </section>
+<section class="section" id="gallery">
+<div class="heading">
+<p class="eyebrow" data-i18n="gallery_eyebrow"></p>
+<h2 class="serif h2" data-i18n="gallery_title"></h2>
+<p class="lead" data-i18n="gallery_sub"></p>
+</div>
+<div class="gallery-wrap">
+<button class="gal-btn left" id="gal-prev" aria-label="Previous"></button>
+<div class="phone phone--gallery"><img id="gal-img" src="" alt="" /></div>
+<button class="gal-btn right" id="gal-next" aria-label="Next"></button>
+<div class="gal-caption"><h3 class="serif" id="gal-title"></h3><p id="gal-desc"></p></div>
+<div class="dots" id="gal-dots"></div>
+</div>
+</section>
 
-      <section class="section" id="features">
-        <div class="heading">
-          <p class="eyebrow" data-i18n="features_eyebrow"></p>
-          <h2 class="serif h2" data-i18n="features_title"></h2>
-        </div>
-        <div class="free-row"><span class="free-pill" data-i18n="features_sub"></span></div>
-        <div class="feature-groups" id="feature-groups"></div>
-      </section>
+<section class="section" id="features">
+<div class="heading">
+<p class="eyebrow" data-i18n="features_eyebrow"></p>
+<h2 class="serif h2" data-i18n="features_title"></h2>
+</div>
+<div class="free-row"><span class="free-pill" data-i18n="features_sub"></span></div>
+<div class="feature-groups" id="feature-groups"></div>
+</section>
 
-      <section class="section" id="privacy">
-        <div class="heading">
-          <p class="eyebrow" data-i18n="privacy_eyebrow"></p>
-          <h2 class="serif h2" data-i18n="privacy_title"></h2>
-          <p class="lead" data-i18n="privacy_sub"></p>
-        </div>
-        <div class="grid3" id="privacy-grid"></div>
-        <div style="display:flex;justify-content:center;margin-top:32px">
-          <button class="btn btn-secondary" data-nav="privacy"><span class="i" data-icon="shield"></span> <span data-i18n="privacy_btn"></span></button>
-        </div>
-      </section>
+<section class="section" id="privacy">
+<div class="heading">
+<p class="eyebrow" data-i18n="privacy_eyebrow"></p>
+<h2 class="serif h2" data-i18n="privacy_title"></h2>
+<p class="lead" data-i18n="privacy_sub"></p>
+</div>
+<div class="grid3" id="privacy-grid"></div>
+<div style="display:flex;justify-content:center;margin-top:32px">
+<button class="btn btn-secondary" data-nav="privacy"><span class="i" data-icon="shield"></span> <span data-i18n="privacy_btn"></span></button>
+</div>
+</section>
 
-      <section class="section" id="faq">
-        <div class="heading">
-          <p class="eyebrow" data-i18n="faq_eyebrow"></p>
-          <h2 class="serif h2" data-i18n="faq_title"></h2>
-          <p class="lead" data-i18n="faq_sub"></p>
-        </div>
-        <div class="faq-list" id="faq-list"></div>
-      </section>
-    </main>
+<section class="section" id="faq">
+<div class="heading">
+<p class="eyebrow" data-i18n="faq_eyebrow"></p>
+<h2 class="serif h2" data-i18n="faq_title"></h2>
+<p class="lead" data-i18n="faq_sub"></p>
+</div>
+<div class="faq-list" id="faq-list"></div>
+</section>
+</main>
 
-    <!-- ============ PRIVACY ============ -->
-    <main id="page-privacy" hidden>
-      <section class="section privacy-hero" id="policy">
-        <div class="shield" data-icon="shield"></div>
-        <h1 class="serif" data-i18n="pp_title"></h1>
-        <p class="intro" data-i18n="pp_intro"></p>
-        <div class="policy-meta">
-          <span><strong data-i18n="pp_version"></strong>: <span id="pp-version"></span></span>
-          <span><strong data-i18n="pp_updated"></strong>: <span id="pp-updated"></span></span>
-        </div>
-      </section>
-      <section class="section section--tight">
-        <div class="policy-card">
-          <h2 class="serif" data-i18n="pp_summary_title"></h2>
-          <p data-i18n="pp_summary1"></p>
-          <p data-i18n="pp_summary2"></p>
-        </div>
-        <div class="policy-grid" id="policy-grid"></div>
-        <div class="policy-card" id="permissions">
-          <h2 class="serif" data-i18n="pp_perm_title"></h2>
-          <p data-i18n="pp_perm_intro"></p>
-          <div class="perm-list" id="perm-list"></div>
-        </div>
-        <div class="policy-card">
-          <h2 class="serif" data-i18n="pp_backup_title"></h2>
-          <p data-i18n="pp_backup_text"></p>
-        </div>
-        <div class="policy-card">
-          <h2 class="serif" data-i18n="pp_contact_title"></h2>
-          <p><span data-i18n="pp_contact_text"></span> <a id="pp-contact-mail" href="#"></a>.</p>
-        </div>
-      </section>
-    </main>
+<!-- ============ PRIVACY ============ -->
+<main id="page-privacy" hidden>
+<section class="section privacy-hero" id="policy">
+<div class="shield" data-icon="shield"></div>
+<h1 class="serif" data-i18n="pp_title"></h1>
+<p class="intro" data-i18n="pp_intro"></p>
+<div class="policy-meta">
+<span><strong data-i18n="pp_version"></strong>: <span id="pp-version"></span></span>
+<span><strong data-i18n="pp_updated"></strong>: <span id="pp-updated"></span></span>
+</div>
+</section>
+<section class="section section--tight">
+<div class="policy-card">
+<h2 class="serif" data-i18n="pp_summary_title"></h2>
+<p data-i18n="pp_summary1"></p>
+<p data-i18n="pp_summary2"></p>
+</div>
+<div class="policy-grid" id="policy-grid"></div>
+<div class="policy-card" id="permissions">
+<h2 class="serif" data-i18n="pp_perm_title"></h2>
+<p data-i18n="pp_perm_intro"></p>
+<div class="perm-list" id="perm-list"></div>
+</div>
+<div class="policy-card">
+<h2 class="serif" data-i18n="pp_backup_title"></h2>
+<p data-i18n="pp_backup_text"></p>
+</div>
+<div class="policy-card">
+<h2 class="serif" data-i18n="pp_contact_title"></h2>
+<p><span data-i18n="pp_contact_text"></span> <a id="pp-contact-mail" href="#"></a>.</p>
+</div>
+</section>
+</main>
 
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer">
-      <div class="footer-main">
-        <div class="footer-col">
-          <div class="footer-brand"><img src="assets/brand/icon_512.png" alt="" />Arise</div>
-          <p data-i18n="footer_tagline"></p>
-          <a class="footer-icon" id="footer-mail" href="#" aria-label="Email"><span data-icon="mail"></span></a>
-        </div>
-        <div class="footer-col">
-          <h3 data-i18n="footer_links"></h3>
-          <button class="footer-link" data-scroll="gallery" data-i18n="nav_gallery"></button>
-          <button class="footer-link" data-nav="privacy" data-i18n="nav_privacy"></button>
-          <button class="footer-link" data-scroll="faq" data-i18n="nav_faq"></button>
-        </div>
-        <div class="footer-col">
-          <h3 data-i18n="footer_contact"></h3>
-          <a id="footer-email-1" href="#"></a>
-          <a id="footer-email-2" href="#" data-i18n="footer_email"></a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p id="footer-copyright"></p>
-        <button class="footer-link" data-nav="privacy" data-i18n="pp_title"></button>
-      </div>
-    </footer>
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+<div class="footer-main">
+<div class="footer-col">
+<div class="footer-brand"><img src="assets/brand/icon_512.png" alt="" />Arise</div>
+<p data-i18n="footer_tagline"></p>
+<a class="footer-icon" id="footer-mail" href="#" aria-label="Email"><span data-icon="mail"></span></a>
+</div>
+<div class="footer-col">
+<h3 data-i18n="footer_links"></h3>
+<button class="footer-link" data-scroll="gallery" data-i18n="nav_gallery"></button>
+<button class="footer-link" data-nav="privacy" data-i18n="nav_privacy"></button>
+<button class="footer-link" data-scroll="faq" data-i18n="nav_faq"></button>
+</div>
+<div class="footer-col">
+<h3 data-i18n="footer_contact"></h3>
+<a id="footer-email-1" href="#"></a>
+<a id="footer-email-2" href="#" data-i18n="footer_email"></a>
+</div>
+</div>
+<div class="footer-bottom">
+<p id="footer-copyright"></p>
+<button class="footer-link" data-nav="privacy" data-i18n="pp_title"></button>
+</div>
+</footer>
 <button class="back-to-top" id="back-to-top" aria-label="Back to top"><span data-icon="chevronUp">
 </span></button>
-    <script type="module" src="./src/app.js"></script>
-  </body>
+<script type="module" src="./src/app.js"></script>
+</body>
 </html>
