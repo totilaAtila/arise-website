@@ -8,8 +8,7 @@ theme_label: 'Tema', theme_dark: 'Nightfall', theme_light: 'Aurora',
 hero_pill: 'Android žadintuvas be interneto',
 hero_title_a: 'Kelkis švelniai.', hero_title_b: 'Viską valdai tu.',
 hero_sub: 'Android žadintuvas su laipsnišku žadinimu, individualiomis temomis, laikmačiu ir chronometru. Jokios paskyros, jokio sekimo — viskas lieka tavo įrenginyje.',
-cta_group: '1. Prisijunk prie Google grupės', cta_test: '2. Įsijunk į testavimą', cta_play: '3. Įsidiek iš „Google Play“',
-cta_steps_note: 'Atlik šiuos 3 žingsnius iš eilės, kad taptum testuotoju.',
+cta_play: 'Įsidiek iš „Google Play“',
 hero_note: 'Nemokama visiems. Veikia visiškai be interneto.',
 qp_alarms: 'Keli žadintuvai', qp_themes: 'Individualios temos', qp_volume: 'Laipsniškas garsumas', qp_privacy: 'Jokio sekimo',
 
@@ -92,7 +91,7 @@ cards: [
 faq_eyebrow: 'DUK', faq_title: 'Klausimai ir atsakymai.', faq_sub: 'Tai, ko klausiama dažniausiai.',
 faqs: [
 ['Ar programėlė nemokama?', 'Taip. Visos funkcijos nemokamos.'],
-['Kur ją atsisiųsti?', '„Google Play“ parduotuvėje. Taip pat gali prisijungti prie testinės versijos ir gauti ją anksčiau.'],
+['Kur ją atsisiųsti?', '„Google Play“ parduotuvėje.'],
 ['Ar veikia be interneto?', 'Taip. Arise veikia visiškai be interneto ir paskyros nereikia.'],
 ['Ar žadintuvai skambės įjungus „Netrukdyti“?', 'Taip. Žadintuvai nustatyti skambėti ir įjungus „Netrukdyti“.'],
 ['Ar galiu naudoti savo garsą?', 'Taip. Melodija gali būti bet kuris tavo įrenginio garso failas.'],

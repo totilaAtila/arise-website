@@ -8,8 +8,7 @@ export default {
     hero_pill: 'Offline-Wecker für Android',
     hero_title_a: 'Sanft aufwachen.', hero_title_b: 'Alles im Griff.',
     hero_sub: 'Ein Wecker für Android mit sanftem Aufwachen, eigenen Designs, Timer und Stoppuhr. Kein Konto, kein Tracking — alles bleibt auf deinem Gerät.',
-    cta_group: '1. Google-Gruppe beitreten', cta_test: '2. Am Test teilnehmen', cta_play: '3. Von Google Play installieren',
-    cta_steps_note: 'Folge diesen 3 Schritten der Reihe nach, um Tester zu werden.',
+    cta_play: 'Von Google Play installieren',
     hero_note: 'Kostenlos für alle. Funktioniert komplett offline.',
     qp_alarms: 'Mehrere Alarme', qp_themes: 'Eigene Designs', qp_volume: 'Langsam lauter', qp_privacy: 'Kein Tracking',
 
@@ -92,7 +91,7 @@ export default {
     faq_eyebrow: 'FAQ', faq_title: 'Fragen & Antworten.', faq_sub: 'Was am häufigsten gefragt wird.',
     faqs: [
           ['Ist die App kostenlos?', 'Ja. Jede Funktion ist kostenlos.'],
-          ['Wo kann ich sie herunterladen?', 'Bei Google Play. Über das Testprogramm bekommst du auch frühe Versionen.'],
+          ['Wo kann ich sie herunterladen?', 'Bei Google Play.'],
           ['Funktioniert sie offline?', 'Ja. Arise läuft komplett offline und braucht kein Konto.'],
           ['Klingeln Alarme bei „Bitte nicht stören“?', 'Ja. Alarme klingeln auch bei „Bitte nicht stören“.'],
           ['Kann ich eigene Töne nutzen?', 'Ja. Du kannst jede beliebige Audiodatei auf deinem Gerät als Alarmton wählen.'],

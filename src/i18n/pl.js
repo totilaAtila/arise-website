@@ -8,8 +8,7 @@ theme_label: 'Motyw', theme_dark: 'Nightfall', theme_light: 'Aurora',
 hero_pill: 'Budzik offline dla Androida',
 hero_title_a: 'Budź się łagodnie.', hero_title_b: 'Miej kontrolę.',
 hero_sub: 'Budzik dla Androida ze stopniowym budzeniem, własnymi motywami, minutnikiem i stoperem. Bez konta, bez śledzenia — wszystko zostaje na Twoim urządzeniu.',
-cta_group: '1. Dołącz do grupy Google', cta_test: '2. Zapisz się do testów', cta_play: '3. Zainstaluj z Google Play',
-cta_steps_note: 'Wykonaj te 3 kroki po kolei, aby zostać testerem.',
+cta_play: 'Zainstaluj z Google Play',
 hero_note: 'Darmowy dla każdego. Działa w pełni offline.',
 qp_alarms: 'Wiele alarmów', qp_themes: 'Własne motywy', qp_volume: 'Stopniowa głośność', qp_privacy: 'Bez śledzenia',
 
@@ -92,7 +91,7 @@ cards: [
 faq_eyebrow: 'FAQ', faq_title: 'Pytania i odpowiedzi.', faq_sub: 'To, o co pytają najczęściej.',
 faqs: [
 ['Czy aplikacja jest darmowa?', 'Tak. Każda funkcja jest darmowa.'],
-['Skąd mogę ją pobrać?', 'Z Google Play. Możesz też dołączyć do wersji testowej, by mieć wczesne wydania.'],
+['Skąd mogę ją pobrać?', 'Z Google Play.'],
 ['Czy działa offline?', 'Tak. Arise działa w pełni offline i nie wymaga konta.'],
 ['Czy alarmy dzwonią w trybie Nie przeszkadzać?', 'Tak. Alarmy są ustawione tak, by dzwonić mimo trybu Nie przeszkadzać.'],
 ['Czy mogę użyć własnego dźwięku?', 'Tak. Możesz wybrać dowolny plik audio jako dźwięk alarmu.'],

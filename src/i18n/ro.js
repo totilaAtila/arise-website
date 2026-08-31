@@ -8,8 +8,7 @@ theme_label: 'Temă', theme_dark: 'Nightfall', theme_light: 'Aurora',
 hero_pill: 'Ceas cu alarmă offline pentru Android',
 hero_title_a: 'Trezește-te blând.', hero_title_b: 'Rămâi în control.',
 hero_sub: 'Un ceas cu alarmă pentru Android cu trezire treptată, teme personalizabile, cronometru și temporizator. Fără cont, fără urmărire — totul rămâne pe dispozitivul tău.',
-cta_group: '1. Alătură-te grupului Google', cta_test: '2. Înscrie-te la testare', cta_play: '3. Instalează din Google Play',
-cta_steps_note: 'Urmează acești 3 pași, în ordine, ca să devii tester.',
+cta_play: 'Instalează din Google Play',
 hero_note: 'Gratuit pentru toți. Funcționează complet offline.',
 qp_alarms: 'Alarme multiple', qp_themes: 'Teme personalizate', qp_volume: 'Volum gradual', qp_privacy: 'Fără urmărire',
 
@@ -92,7 +91,7 @@ cards: [
 faq_eyebrow: 'Întrebări', faq_title: 'Întrebări și răspunsuri.', faq_sub: 'Ce se întreabă cel mai des.',
 faqs: [
 ['Aplicația este gratuită?', 'Da. Toate funcțiile sunt gratuite.'],
-['De unde o pot descărca?', 'Din Google Play. Poți intra și în versiunea de test pentru versiuni timpurii.'],
+['De unde o pot descărca?', 'Din Google Play.'],
 ['Funcționează offline?', 'Da. Arise rulează complet offline și nu are nevoie de cont.'],
 ['Alarmele sună în modul Nu deranja?', 'Da. Alarmele sunt setate să sune și în modul Nu deranja.'],
 ['Pot folosi propriul sunet?', 'Da. Poți alege orice fișier audio de pe dispozitiv ca ton de alarmă.'],
