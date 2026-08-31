@@ -8,8 +8,7 @@ export default {
     hero_pill: 'Offline alarm clock for Android',
     hero_title_a: 'Wake up gently.', hero_title_b: 'Stay in control.',
     hero_sub: 'An alarm clock for Android with gradual wake-ups, custom themes, a timer and a stopwatch. No account, no tracking — everything stays on your device.',
-    cta_group: '1. Join the Google Group', cta_test: '2. Opt in to the test', cta_play: '3. Install from Google Play',
-    cta_steps_note: 'Follow these 3 steps in order to become a tester.',
+    cta_play: 'Get it on Google Play',
     hero_note: 'Free for everyone. Works fully offline.',
     qp_alarms: 'Multiple alarms', qp_themes: 'Custom themes', qp_volume: 'Gradual volume', qp_privacy: 'No tracking',
 
@@ -92,7 +91,7 @@ export default {
     faq_eyebrow: 'FAQ', faq_title: 'Questions & answers.', faq_sub: 'The things people ask most.',
     faqs: [
           ['Is the app free?', 'Yes. Every feature is free.'],
-          ['Where can I download it?', 'On Google Play. You can also join the test build to get early versions.'],
+          ['Where can I download it?', 'On Google Play.'],
           ['Does it work offline?', 'Yes. Arise runs fully offline and needs no account.'],
           ['Will alarms ring in Do Not Disturb?', 'Yes. Alarms are set to sound through Do Not Disturb.'],
           ['Can I use my own sound?', 'Yes. You can pick any audio file on your device as an alarm tone.'],

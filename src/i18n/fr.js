@@ -8,8 +8,7 @@ export default {
   hero_pill: 'Réveil hors ligne pour Android',
   hero_title_a: 'Réveil en douceur.', hero_title_b: 'Gardez le contrôle.',
   hero_sub: 'Un réveil pour Android qui vous tire du sommeil en douceur, avec des thèmes personnalisés, un minuteur et un chronomètre. Sans compte, sans suivi — tout reste sur votre appareil.',
-  cta_group: '1. Rejoignez le groupe Google', cta_test: '2. Inscrivez-vous au test', cta_play: '3. Installez depuis Google Play',
-  cta_steps_note: 'Suivez ces 3 étapes dans l\'ordre pour devenir testeur.',
+  cta_play: 'Installez depuis Google Play',
   hero_note: 'Gratuit pour tous. Fonctionne entièrement hors ligne.',
   qp_alarms: 'Alarmes multiples', qp_themes: 'Thèmes personnalisés', qp_volume: 'Volume progressif', qp_privacy: 'Aucun suivi',
 
@@ -92,7 +91,7 @@ export default {
   faq_eyebrow: 'FAQ', faq_title: 'Questions et réponses.', faq_sub: 'Ce que l\'on demande le plus souvent.',
   faqs: [
     ['L\'application est-elle gratuite ?', 'Oui. Toutes les fonctionnalités sont gratuites.'],
-    ['Où puis-je la télécharger ?', 'Sur Google Play. Rejoignez aussi le programme de test pour les nouveautés en avant-première.'],
+    ['Où puis-je la télécharger ?', 'Sur Google Play.'],
     ['Fonctionne-t-elle hors ligne ?', 'Oui. Arise fonctionne entièrement hors ligne, sans compte.'],
     ['Les alarmes sonnent-elles en mode Ne pas déranger ?', 'Oui. Les alarmes sonnent même en mode Ne pas déranger.'],
     ['Puis-je utiliser mon propre son ?', 'Oui. Choisissez n\'importe quel fichier audio de votre appareil comme sonnerie.'],

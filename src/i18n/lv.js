@@ -8,8 +8,7 @@ theme_label: 'Motīvs', theme_dark: 'Nightfall', theme_light: 'Aurora',
 hero_pill: 'Bezsaistes modinātājs Android ierīcēm',
 hero_title_a: 'Mosties maigi.', hero_title_b: 'Kontrole paliek tev.',
 hero_sub: 'Modinātājs Android ierīcēm ar pakāpenisku modināšanu, pielāgojamiem motīviem, taimeri un hronometru. Bez konta, bez izsekošanas — viss paliek tavā ierīcē.',
-cta_group: '1. Pievienojies Google grupai', cta_test: '2. Piesakies testēšanai', cta_play: '3. Instalē no Google Play',
-cta_steps_note: 'Izpildi šos 3 soļus pēc kārtas, lai kļūtu par testētāju.',
+cta_play: 'Instalē no Google Play',
 hero_note: 'Bez maksas ikvienam. Darbojas pilnībā bezsaistē.',
 qp_alarms: 'Vairāki modinātāji', qp_themes: 'Pielāgoti motīvi', qp_volume: 'Pakāpenisks skaļums', qp_privacy: 'Bez izsekošanas',
 
@@ -92,7 +91,7 @@ cards: [
 faq_eyebrow: 'Jautājumi', faq_title: 'Jautājumi un atbildes.', faq_sub: 'Tas, ko jautā visbiežāk.',
 faqs: [
 ['Vai lietotne ir bez maksas?', 'Jā. Visas funkcijas ir bez maksas.'],
-['Kur to var lejupielādēt?', 'Google Play. Vari arī pievienoties testēšanai, lai agrāk saņemtu jaunās versijas.'],
+['Kur to var lejupielādēt?', 'Google Play.'],
 ['Vai tā darbojas bezsaistē?', 'Jā. Arise darbojas pilnībā bezsaistē, un konts nav vajadzīgs.'],
 ['Vai modinātāji zvana režīmā “Netraucēt”?', 'Jā. Modinātāji ir iestatīti tā, lai skanētu arī režīmā “Netraucēt”.'],
 ['Vai varu izmantot savu skaņu?', 'Jā. Par modinātāja signālu vari izvēlēties jebkuru audio failu savā ierīcē.'],

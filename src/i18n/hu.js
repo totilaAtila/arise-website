@@ -8,8 +8,7 @@ theme_label: 'Téma', theme_dark: 'Nightfall', theme_light: 'Aurora',
 hero_pill: 'Offline ébresztőóra Androidra',
 hero_title_a: 'Ébredj gyengéden.', hero_title_b: 'Tartsd kézben.',
 hero_sub: 'Ébresztőóra Androidra fokozatos ébresztéssel, egyéni témákkal, időzítővel és stopperrel. Fiók és követés nélkül — minden a készülékeden marad.',
-cta_group: '1. Csatlakozz a Google-csoporthoz', cta_test: '2. Iratkozz fel a tesztre', cta_play: '3. Telepítsd a Google Playről',
-cta_steps_note: 'Kövesd ezt a 3 lépést sorban, hogy tesztelő lehess.',
+cta_play: 'Telepítsd a Google Playről',
 hero_note: 'Mindenkinek ingyenes. Teljesen offline működik.',
 qp_alarms: 'Több ébresztő', qp_themes: 'Egyéni témák', qp_volume: 'Fokozatos hangerő', qp_privacy: 'Nincs követés',
 
@@ -92,7 +91,7 @@ cards: [
 faq_eyebrow: 'GYIK', faq_title: 'Kérdések és válaszok.', faq_sub: 'Amit a legtöbben kérdeznek.',
 faqs: [
 ['Ingyenes az alkalmazás?', 'Igen. Minden funkció ingyenes.'],
-['Honnan tölthetem le?', 'A Google Playről. Csatlakozhatsz a tesztverzióhoz is a korai kiadásokért.'],
+['Honnan tölthetem le?', 'A Google Playről.'],
 ['Működik offline?', 'Igen. Az Arise teljesen offline fut, és nem igényel fiókot.'],
 ['Szólnak az ébresztők Ne zavarj módban?', 'Igen. Az ébresztők úgy vannak beállítva, hogy Ne zavarj módban is szóljanak.'],
 ['Használhatom a saját hangomat?', 'Igen. Bármely hangfájlt kiválaszthatsz ébresztőhangnak.'],
